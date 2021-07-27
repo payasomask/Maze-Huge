@@ -203,6 +203,32 @@ public class MazeManager : MonoBehaviour
 
     //FloorManager._FloorManager.init();
     //FloorManager._FloorManager.updateSize(maze_cellsize * maze_columns, maze_cellsize * maze_rows);
+
+    //item
+    if (mr.ItmePosition_list != null)
+    {
+      for (int i = 0; i < mr.ItmePosition_list.Count; i++)
+      {
+        JsonVector2 j = mr.ItmePosition_list[i];
+        Vector2 v = new Vector2(j.x, j.y);
+        PlayerItemManager._PlayerItemManager.UseTorch(v);
+      }
+    }
+
+    if (mr.lineRender_lists != null)
+    {
+      for (int i = 0; i < mr.lineRender_lists.Count; i++){
+        JsonVector3[] js = mr.lineRender_lists[i];
+        Vector3[] Vs = new Vector3[js.Length];
+        int index = 0;
+        foreach(var v in js){
+          Vs[index] = new Vector3(v.x,v.y,v.z);
+          index++;
+        }
+        LineRenderManager._LineRenderManager.BuildLine(Vs);
+      }
+    }
+
   }
 
 
@@ -310,5 +336,9 @@ public class MazeManager : MonoBehaviour
     if (playercontroller == null)
       return false;
     return playercontroller.IsTrackLine();
+  }
+
+  public float gametimer(){
+    return mMS.getGametimer();
   }
 }

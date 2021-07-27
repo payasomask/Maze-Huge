@@ -27,6 +27,7 @@ public class TorchManager : MonoBehaviour
     Torch tmpT = new Torch();
 
     GameObject tmp = instantiateObject(gameObject, "Torch");
+    MLCamera._MLCamera.setGameObjectLayer(tmp, "MAZE");
     GameObject icon_go = tmp.transform.Find("Icon").gameObject;
     Sprite icon = icon_go.GetComponent<SpriteRenderer>().sprite;
 
@@ -51,7 +52,6 @@ public class TorchManager : MonoBehaviour
     tmpT.id = torchid;
     torchid++;
     torch_dic.Add(tmpT.id, tmpT);
-
   }
 
   public void ClearAllTorch(){

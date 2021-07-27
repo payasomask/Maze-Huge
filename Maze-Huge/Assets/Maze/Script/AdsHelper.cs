@@ -289,8 +289,10 @@ public class AdsHelper : MonoBehaviour
   private RewardedAd rewardedAd;
   public void RequestRewardAds()
   {
-
-    if(rewardedAd != null){
+#if !UNITY_ANDROID
+    return;
+#endif
+    if (rewardedAd != null){
       rewardedAd.Destroy();
       rewardedAd = null;
     }

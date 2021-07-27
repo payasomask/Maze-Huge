@@ -25,7 +25,7 @@ public class MazeScene : MonoBehaviour,IScene
   int currentlevel;
 
   //倒數10-1是否已經播放過
-  bool fsx_played = false;
+  //bool fsx_played = false;
 
   //UIButton staffbt = null;
   //bool staff_used = false;
@@ -85,7 +85,6 @@ public class MazeScene : MonoBehaviour,IScene
     {
       mRoot = instantiateObject(dynamicObj, "Maze");
     }
-
     timer = mRoot.transform.Find("TopUI/bg/timer").GetComponent<TextMeshPro>();
     updateGameTime(gametime);
 
@@ -218,6 +217,9 @@ public class MazeScene : MonoBehaviour,IScene
       ()=>{
         //YES
         PlayerItemManager._PlayerItemManager.UseTorch(MazeManager._MazeManager.PlayerPosition());
+        //PlayerPrefsManager._PlayerPrefsManager.Item1Num--;
+        PlayerPrefsManager._PlayerPrefsManager.updateItmeRecord(MazeManager._MazeManager.PlayerPosition());
+
         updateUI();
 
         currentstate = State.IDLE;
@@ -237,6 +239,7 @@ public class MazeScene : MonoBehaviour,IScene
       },
       ()=>{
         PlayerItemManager._PlayerItemManager.UseOilLamp();
+        //PlayerPrefsManager._PlayerPrefsManager.Item2Num--;
         updateUI();
         currentstate = State.IDLE;
         return;
@@ -333,6 +336,7 @@ public class MazeScene : MonoBehaviour,IScene
       MazeRecord mr = PlayerPrefsManager._PlayerPrefsManager.mazerecord;
       if (mr != null){
         //讀取紀錄
+        gametime = mr.time;
         MazeManager._MazeManager.CreatMaze(mr);
       }
       else{
@@ -439,6 +443,7 @@ public class MazeScene : MonoBehaviour,IScene
         pDisposeHandler( SceneDisposeReason.USER_EXIT,null);
         GetAdReward(config.CompletedReward.SkipType,config.CompletedReward.SkipNum);
         AdsHelper._AdsHelper.DismissBannerAds();
+        PlayerPrefsManager._PlayerPrefsManager.clearRecord();
         return;
       },
       ()=>{
@@ -491,16 +496,16 @@ public class MazeScene : MonoBehaviour,IScene
     if (timer == null)
       return;
 
-    if(time <= 10.00f && !fsx_played){
-      AudioController._AudioController.playOverlapEffect("到數讀秒10-1");
-      fsx_played = true;
-    }
+    //if(time <= 10.00f && !fsx_played){
+    //  AudioController._AudioController.playOverlapEffect("到數讀秒10-1");
+    //  fsx_played = true;
+    //}
 
     TimeSpan span = TimeSpan.FromSeconds((double)(new decimal(time)));
     DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
     DateTime date = epoch + span;
 
-    timer.text = "TIME " + date.ToString("D:HH:mm:ss.ff");
+    timer.text = "TIME " + date.ToString("HH:mm:ss.ff");
   }
 
   void PlayerControll(){
@@ -667,5 +672,9 @@ public class MazeScene : MonoBehaviour,IScene
 
       PlayerPrefsManager._PlayerPrefsManager.LightMazeLevel++;
 
+  }
+
+  public float getGametimer(){
+    return gametime;
   }
 }

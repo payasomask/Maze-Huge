@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class JsonLoader : MonoBehaviour
 {
@@ -136,6 +137,7 @@ public class MazeRecord{
   public JsonVector2 goallocation;
   public JsonVector2 boxlocation;
   public List<JsonVector3[]> lineRender_lists = null;
+  public List<JsonVector2> ItmePosition_list= null;
   public float time;
 }
 

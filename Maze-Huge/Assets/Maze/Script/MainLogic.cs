@@ -123,6 +123,7 @@ public class PlayerPrefsManager
     set
     {
       _mazerecord = value;
+      _mazerecord.time = MazeManager._MazeManager.gametimer();
       string record_dic_string = Newtonsoft.Json.JsonConvert.SerializeObject(_mazerecord);
       savePlayerPrefsString(RecordKey, record_dic_string);
     }
@@ -189,6 +190,18 @@ public class PlayerPrefsManager
 
     mazerecord = _mazerecord;
   }
+
+  public void updateItmeRecord(Vector2 itmeposition)
+  {
+    if (_mazerecord == null)
+      _mazerecord = new MazeRecord();
+    if (_mazerecord.ItmePosition_list == null)
+      _mazerecord.ItmePosition_list = new List<JsonVector2>();
+
+    _mazerecord.ItmePosition_list.Add(new JsonVector2(itmeposition.x, itmeposition.y));
+
+    mazerecord = _mazerecord;
+  }
   public void updateRecord(float time)
   {
     if (_mazerecord == null)
@@ -217,6 +230,7 @@ public class PlayerPrefsManager
   }
   public void clearRecord(){
     PlayerPrefs.DeleteKey(RecordKey);
+    _mazerecord = null;
   }
 
   public void GetRewrd(ItmeType type,int Num){
@@ -898,7 +912,6 @@ public class MainLogic : MonoBehaviour
       else
       if (sdr == SceneDisposeReason.USER_EXIT)
       {
-        PlayerPrefsManager._PlayerPrefsManager.clearRecord();
         mCurrentSceneTransition = new SceneTransition("LobbyScene", new object[] { }, delegate ()
         {
           mCurrentSceneTransition = null;

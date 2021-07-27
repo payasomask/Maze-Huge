@@ -22,12 +22,7 @@ public class MazePlayerController : MonoBehaviour
     Arrival,
     Moving,
   }
-  enum MoveType
-  {
-    New,
-    Goback,
-  }
-  MoveType mcurrentType = MoveType.New;
+
   MoveState mcurrentState = MoveState.Arrival;
     // Update is called once per frame
     void Update()
@@ -84,10 +79,16 @@ public class MazePlayerController : MonoBehaviour
     //movepath是不包含現在站著的Cell
     movepath = MazeManager._MazeManager.GetMaze().movePath(currentx, currenty,dir);
 
-    mcurrentType = MoveType.New;
-
     if (movepath.Count == 0)
       return;
+
+    //我必須先知道將要移動的點是不是已經在trackpath中了
+    int CellIntrackpathindex = trackpath.IndexOf(movepath[0]);
+    if (CellIntrackpathindex >= 0){
+      //如果是表示正在收線
+      //那就移除腳下的點
+      RemoveTrackPath(MazeManager._MazeManager.GetMaze().GetCell(currentx, currenty));
+    }
 
     //Debug.Log("MOVESTART : " + mcurrentType);
     //Debug.Log("移動格數 : " + movepath.Count);
@@ -123,22 +124,31 @@ public class MazePlayerController : MonoBehaviour
 
       MazeManager._MazeManager.ArrivalCell("player", TargetCell);
 
-      if (mcurrentType == MoveType.New)
-      AddTrackPath(TargetCell);
-      else{
-        if (movepath.Count == 1){
-          //往回走的時候最後一個targetCell不要刪除
-        }
-        else
-          RemoveTrackPath(TargetCell);
+      //到達目標時
+      int CellIntrackpathindex = trackpath.IndexOf(TargetCell);
+      if(CellIntrackpathindex < 0){
+        AddTrackPath(TargetCell);
       }
-      
-      movepath.RemoveAt(0);
+      //RemoveTrackPath(TargetCell);
+
+
+        movepath.RemoveAt(0);
       if (movepath.Count > 0)
         mcurrentState = MoveState.Moving;
-      else//移動到最後一個的時候紀錄位置
+      else{//移動到最後一個的時候紀錄位置
         PlayerPrefsManager._PlayerPrefsManager.updateRecord(new Vector2(currentx, currenty));
-      return;
+        return;
+      }
+      //如果還有目標
+      //我必須先知道即將要移動到的點是不是已經在trackpath中了
+      CellIntrackpathindex = trackpath.IndexOf(movepath[0]);
+      if (CellIntrackpathindex >= 0)
+      {
+        //如果是表示正在收線
+        //那就移除腳下的點
+        RemoveTrackPath(MazeManager._MazeManager.GetMaze().GetCell(currentx, currenty));
+      }
+
     }
 
     gameObject.transform.position += (Vector3)(dir * dis);
@@ -188,7 +198,7 @@ public class MazePlayerController : MonoBehaviour
     trackpositions[trackpath.Count] = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, linedepth);
     LineRenderer.SetPositions(trackpositions);
 
-    if (trackpath.Count -1 > 5)
+    if (trackpath.Count - 1 > 5)
     {
       LineRenderManager._LineRenderManager.BuildLine(trackpositions);
       PlayerPrefsManager._PlayerPrefsManager.updateRecord(trackpositions);

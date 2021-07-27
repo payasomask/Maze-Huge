@@ -15,12 +15,16 @@ public class LineRenderManager : MonoBehaviour
 
     public void BuildLine(Vector3[] positions){
     GameObject tmp = new GameObject("Line");
+    tmp.transform.SetParent(transform);
     LineRenderer lr = tmp.AddComponent<LineRenderer>();
+    MLCamera._MLCamera.setGameObjectLayer(tmp,"MAZE");
+    lr.material = new Material(Shader.Find("Sprites/Default"));
     lr.alignment = LineAlignment.TransformZ;
     lr.endColor = LineColor;
     lr.startColor = LineColor;
     lr.startWidth = lineWidth();
     lr.endWidth = lineWidth();
+    lr.positionCount = positions.Length;
     lr.SetPositions(positions);
   }
 
