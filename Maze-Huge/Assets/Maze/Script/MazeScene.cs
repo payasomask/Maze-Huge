@@ -24,7 +24,7 @@ public class MazeScene : MonoBehaviour,IScene
   MazeConfig config = null;
   int currentlevel;
 
-  //­Ë¼Æ10-1¬O§_¤w¸g¼½©ñ¹L
+  //å€’æ•¸10-1æ˜¯å¦å·²ç¶“æ’­æ”¾é
   //bool fsx_played = false;
 
   //UIButton staffbt = null;
@@ -136,7 +136,7 @@ public class MazeScene : MonoBehaviour,IScene
       if(name == "SilderReceiver"){
         Vector2 slider_dir = (Vector2)extra_info[0];
 
-        Debug.Log("TOUCH_LEAVE¡A slider_dir :" + slider_dir);
+        Debug.Log("TOUCH_LEAVEï¼Œ slider_dir :" + slider_dir);
 
         if (slider_dir == Vector2.zero)
           return;
@@ -144,7 +144,7 @@ public class MazeScene : MonoBehaviour,IScene
         if (currentstate != State.IDLE)
           return;
 
-        //¶}©l§PÂ_¤è¦V¡A¥ı¤À¿ë¬O¥ª¥k¤jÁÙ¬O¤W¤U¤j
+        //é–‹å§‹åˆ¤æ–·æ–¹å‘ï¼Œå…ˆåˆ†è¾¨æ˜¯å·¦å³å¤§é‚„æ˜¯ä¸Šä¸‹å¤§
         float horizontalstr, vertaiclstr;
         horizontalstr = Mathf.Abs(slider_dir.x);
         vertaiclstr = Mathf.Abs(slider_dir.y);
@@ -152,12 +152,12 @@ public class MazeScene : MonoBehaviour,IScene
         {
           if (slider_dir.y >= 0.0f)
           {
-            //©¹¤W²¾°Ê
+            //å¾€ä¸Šç§»å‹•
             PlayerControll(Dir.Top);
           }
           else
           {
-            //©¹¤U²¾°Ê
+            //å¾€ä¸‹ç§»å‹•
             PlayerControll(Dir.Bottom);
           }
         }
@@ -165,13 +165,13 @@ public class MazeScene : MonoBehaviour,IScene
         {
           if (slider_dir.x >= 0.0f)
           {
-            //©¹¥k²¾°Ê
+            //å¾€å³ç§»å‹•
             PlayerControll(Dir.Right);
 
           }
           else
           {
-            //©¹¥ª²¾°Ê
+            //å¾€å·¦ç§»å‹•
             PlayerControll(Dir.Left);
 
           }
@@ -184,7 +184,7 @@ public class MazeScene : MonoBehaviour,IScene
     {
       if (name == "stopbt")
       {
-        AudioController._AudioController.playOverlapEffect("¼È°±«ö¶s­µ®Ä");
+        AudioController._AudioController.playOverlapEffect("æš«åœæŒ‰éˆ•éŸ³æ•ˆ");
         SpriteRenderer bt = transform.Find("Maze(Clone)/TopUI/bg/stopbt").GetComponent<SpriteRenderer>();
         SpriteRenderer icon = transform.Find("Maze(Clone)/TopUI/bg/stopbt/icon").GetComponent<SpriteRenderer>();
         bt.gameObject.name = "playbt";
@@ -194,7 +194,7 @@ public class MazeScene : MonoBehaviour,IScene
 
       }
       else if(name == "playbt"){
-        AudioController._AudioController.playOverlapEffect("¼È°±«ö¶s­µ®Ä");
+        AudioController._AudioController.playOverlapEffect("æš«åœæŒ‰éˆ•éŸ³æ•ˆ");
         SpriteRenderer bt = transform.Find("Maze(Clone)/TopUI/bg/playbt").GetComponent<SpriteRenderer>();
         SpriteRenderer icon = transform.Find("Maze(Clone)/TopUI/bg/playbt/icon").GetComponent<SpriteRenderer>();
         bt.gameObject.name = "stopbt";
@@ -206,7 +206,7 @@ public class MazeScene : MonoBehaviour,IScene
       }
       else if (name == "Torchbt")
       {
-        AudioController._AudioController.playOverlapEffect("yes_no_¨Ï¥Î¹D¨ã_«öÁä­µ®Ä");
+        AudioController._AudioController.playOverlapEffect("yes_no_ä½¿ç”¨é“å…·_æŒ‰éµéŸ³æ•ˆ");
         //...
         UIDialog._UIDialog.show(new UseItemDialog("Use a torch?", AssetbundleLoader._AssetbundleLoader.InstantiateSprite("common", "toch"), new InteractiveDiaLogHandler[] {
       ()=>{
@@ -231,7 +231,7 @@ public class MazeScene : MonoBehaviour,IScene
       }
       else if (name == "oillampbt")
       {
-        AudioController._AudioController.playOverlapEffect("yes_no_¨Ï¥Î¹D¨ã_«öÁä­µ®Ä");
+        AudioController._AudioController.playOverlapEffect("yes_no_ä½¿ç”¨é“å…·_æŒ‰éµéŸ³æ•ˆ");
         UIDialog._UIDialog.show(new UseItemDialog("Use a oillamp?", AssetbundleLoader._AssetbundleLoader.InstantiateSprite("common", "lamp"), new InteractiveDiaLogHandler[] {
       ()=>{
         currentstate = State.IDLE;
@@ -248,7 +248,7 @@ public class MazeScene : MonoBehaviour,IScene
         currentstate = State.WAITPLAYER;
       }
       else if(name == "adsTorch"){
-        AudioController._AudioController.playOverlapEffect("yes_no_¨Ï¥Î¹D¨ã_«öÁä­µ®Ä");
+        AudioController._AudioController.playOverlapEffect("yes_no_ä½¿ç”¨é“å…·_æŒ‰éµéŸ³æ•ˆ");
         currentstate = State.PLAY_ADS;
         mRoot.transform.Find("DownUI/bg/adsTorch").gameObject.SetActive(false);
         isadwatched = true;
@@ -263,7 +263,7 @@ public class MazeScene : MonoBehaviour,IScene
           return;
         },
                   () => {
-                    //³o­Ó¥D°ÊÂIªº¤£µ¹¼úÀy
+                    //é€™å€‹ä¸»å‹•é»çš„ä¸çµ¦çå‹µ
                     UIDialog._UIDialog.show(new TipDialog("Failed get AD video",
                       () => {
                         currentstate = State.IDLE;
@@ -303,8 +303,7 @@ public class MazeScene : MonoBehaviour,IScene
 
   void Update(){
 
-    //if (Input.GetKeyUp(KeyCode.R))
-    //{
+    //if (Input.GetKeyUp(KeyCode.R)) {
     //  //CREAT_MAZE();
     //  pDisposeHandler(SceneDisposeReason.USER_EXIT, null);
     //  currentstate = State.WAITPLAYER;
@@ -335,12 +334,12 @@ public class MazeScene : MonoBehaviour,IScene
 
       MazeRecord mr = PlayerPrefsManager._PlayerPrefsManager.mazerecord;
       if (mr != null){
-        //Åª¨ú¬ö¿ı
+        //è®€å–ç´€éŒ„
         gametime = mr.time;
         MazeManager._MazeManager.CreatMaze(mr);
       }
       else{
-        //4:3©Î¬O¤è§Î
+        //4:3æˆ–æ˜¯æ–¹å½¢
         MazeManager._MazeManager.ClearMaze();
         MazeManager._MazeManager.CreatMaze(config.Rows, config.Columns);
       }
@@ -348,14 +347,14 @@ public class MazeScene : MonoBehaviour,IScene
 
       //gametime = 0.0f;
 
-      //­«»s­Ë¼Æªº­µ®Ä
+      //é‡è£½å€’æ•¸çš„éŸ³æ•ˆ
       //fsx_played = false;
 
       GameObject SilderReceiver = mRoot.transform.Find("SilderReceiver").gameObject;
       SilderReceiver.GetComponent<BoxCollider2D>().size = MazeManager._MazeManager.GetMazeSize();
       //SilderReceiver.GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, MazeManager._MazeManager.GetMaze_Pivot());
 
-      //°ÊºA½Õ¾ãdownUIªº¦ì¸m
+      //å‹•æ…‹èª¿æ•´downUIçš„ä½ç½®
       //Transform DownUI = mRoot.transform.Find("DownUI/bg").transform;
       //float depth = DownUI.localPosition.z;
       //float downuibg_y = DownUI.GetComponent<SpriteRenderer>().sprite.bounds.size.y * 0.5f;
@@ -365,24 +364,24 @@ public class MazeScene : MonoBehaviour,IScene
 
       currentstate = State.IDLE;
     }else if(currentstate == State.CHECK_ADS){
-      //ÀË¬d¤@¨Ç¦³ªº¨Sªº§PÂ_¤@ÅÀ¿¤¥«¼s§i
+      //æª¢æŸ¥ä¸€äº›æœ‰çš„æ²’çš„åˆ¤æ–·ä¸€é°¾ç¸£å¸‚å»£å‘Š
       //bool shoads = PlayerPrefsManager._PlayerPrefsManager.IsPlayTimesODD();
       //if (shoads){
       //  AdsHelper._AdsHelper.ShowInterstitialAds(()=> {
-      //    //µ²§ô¼s§i«á¡Aªğ¦^¤jÆU
+      //    //çµæŸå»£å‘Šå¾Œï¼Œè¿”å›å¤§å»³
       //    GetAdReward(config.CompletedReward.Type, config.CompletedReward.Num);
       //    });
       //  currentstate = State.PLAY_ADS;
       //  return;
       //}
 
-      ////ªğ¦^¤jÆU
+      ////è¿”å›å¤§å»³
       //currentstate = State.WAITPLAYER;
       //AdsHelper._AdsHelper.DismissBannerAds();
       //pDisposeHandler(SceneDisposeReason.USER_EXIT, null);
       //return;
 
-      //¤£¥Î¼½¼s§i¬İ¬O­n·F¹À...´NÄ~Äò¤U¤@Ãö
+      //ä¸ç”¨æ’­å»£å‘Šçœ‹æ˜¯è¦å¹¹å˜›...å°±ç¹¼çºŒä¸‹ä¸€é—œ
       //CREAT_MAZE();
     }
     else if(currentstate == State.GAME_OVER){
@@ -392,14 +391,14 @@ public class MazeScene : MonoBehaviour,IScene
       //...
       UIDialog._UIDialog.show(new FinishDialog( FinishDialog.Type.GameOver, currentlevel, new InteractiveDiaLogHandler[] {
       ()=>{
-        //ªğ¦^¤jÆU
+        //è¿”å›å¤§å»³
         pDisposeHandler( SceneDisposeReason.USER_EXIT,null);
         GetAdReward(config.GameOverReward.SkipType,config.GameOverReward.SkipNum);
         AdsHelper._AdsHelper.DismissBannerAds();
         return;
       },
       ()=>{
-        //­«»s°g®c¡A©Î¬O¨Ï¥Î­ì°g®c?
+        //é‡è£½è¿·å®®ï¼Œæˆ–æ˜¯ä½¿ç”¨åŸè¿·å®®?
         //CREAT_MAZE();
                 AdsHelper._AdsHelper.ShowRewardAd(()=>{
           AdsHelper._AdsHelper.DismissBannerAds();
@@ -411,7 +410,7 @@ public class MazeScene : MonoBehaviour,IScene
           GetAdReward(config.GameOverReward.Type,config.GameOverReward.Num);
         },
                   ()=>{
-             //ÁÙ¬O­nµ¹skip ad¼úÀy
+             //é‚„æ˜¯è¦çµ¦skip adçå‹µ
             ItmeType skiptype = config.GameOverReward.SkipType;
             string rewardtype = skiptype.ToString();
             int rewardnum = config.GameOverReward.SkipNum;
@@ -439,7 +438,7 @@ public class MazeScene : MonoBehaviour,IScene
       //...do somthing
       UIDialog._UIDialog.show(new FinishDialog( FinishDialog.Type.Completed,currentlevel, new InteractiveDiaLogHandler[] {
       ()=>{
-        //¨ú®øªº¸Ü´N¬Oªğ¦^¤jÆU
+        //å–æ¶ˆçš„è©±å°±æ˜¯è¿”å›å¤§å»³
         pDisposeHandler( SceneDisposeReason.USER_EXIT,null);
         GetAdReward(config.CompletedReward.SkipType,config.CompletedReward.SkipNum);
         AdsHelper._AdsHelper.DismissBannerAds();
@@ -447,7 +446,7 @@ public class MazeScene : MonoBehaviour,IScene
         return;
       },
       ()=>{
-        //..§ó´«°g®c? ­ì³õ´º­«»s? ©Î¬OÔ£ªº¤£ª¾¹D
+        //..æ›´æ›è¿·å®®? åŸå ´æ™¯é‡è£½? æˆ–æ˜¯å•¥çš„ä¸çŸ¥é“
         //CREAT_MAZE();
 
         AdsHelper._AdsHelper.ShowRewardAd(()=>{
@@ -460,7 +459,7 @@ public class MazeScene : MonoBehaviour,IScene
           GetAdReward(config.CompletedReward.Type,config.CompletedReward.Num);
         },
                   ()=>{
-             //ÁÙ¬O­nµ¹skip ad¼úÀy
+             //é‚„æ˜¯è¦çµ¦skip adçå‹µ
             ItmeType skiptype = config.CompletedReward.SkipType;
             string rewardtype = skiptype.ToString();
             int rewardnum = config.CompletedReward.SkipNum;
@@ -475,7 +474,7 @@ public class MazeScene : MonoBehaviour,IScene
 
         );
 
-        //¶i¼s§i
+        //é€²å»£å‘Š
         currentstate = State.PLAY_ADS;
         return;
       }
@@ -497,19 +496,18 @@ public class MazeScene : MonoBehaviour,IScene
       return;
 
     //if(time <= 10.00f && !fsx_played){
-    //  AudioController._AudioController.playOverlapEffect("¨ì¼ÆÅª¬í10-1");
+    //  AudioController._AudioController.playOverlapEffect("åˆ°æ•¸è®€ç§’10-1");
     //  fsx_played = true;
     //}
 
     TimeSpan span = TimeSpan.FromSeconds((double)(new decimal(time)));
     DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
     DateTime date = epoch + span;
-
     timer.text = "TIME " + date.ToString("HH:mm:ss.ff");
   }
 
   void PlayerControll(){
-    //..®Ú¾Ú¤£¦P¥­¥x¦b³o¤Á´«¿é¤J­ì
+    //..æ ¹æ“šä¸åŒå¹³å°åœ¨é€™åˆ‡æ›è¼¸å…¥åŸ
     
     if (Input.GetKeyUp(KeyCode.UpArrow))
     {
@@ -541,7 +539,7 @@ public class MazeScene : MonoBehaviour,IScene
     //  oillampbt.setEnabled(false);
     //  mRoot.transform.Find("DownUI/bg/oillampbt/Prohibit").gameObject.SetActive(true);
     //  mRoot.transform.Find("DownUI/bg/Torchbt/Prohibit").gameObject.SetActive(true);
-    //  //¬İ¹L«áÃö³¬
+    //  //çœ‹éå¾Œé—œé–‰
     //  mRoot.transform.Find("DownUI/bg/adsTorch").gameObject.SetActive(!isadwatched);
     //  return;
     //}
@@ -585,25 +583,25 @@ public class MazeScene : MonoBehaviour,IScene
   public void ArrivalCell(string who, Cell c){
 
     if(c.Type == CellType.Box){
-      AudioController._AudioController.playOverlapEffect("Ä_½c¤¶­±¥X²{´£¥Ü­µ");
+      AudioController._AudioController.playOverlapEffect("å¯¶ç®±ä»‹é¢å‡ºç¾æç¤ºéŸ³");
       UIDialog._UIDialog.show(new ADSDialog( config.boxADReward, new InteractiveDiaLogHandler[] {
       ()=>{
-        //..¬İ¼s§i¤§ÃşªºÔ£ªº
+        //..çœ‹å»£å‘Šä¹‹é¡çš„å•¥çš„
         AdsHelper._AdsHelper.ShowRewardAd(
           ()=>
         {
-          //¥[¸ü¥¢±Ñ©Î¬Oª±®a±j¨î¸õ¹L¼s§i¡A¤@«ß¤£µ¹¼úÀy
+          //åŠ è¼‰å¤±æ•—æˆ–æ˜¯ç©å®¶å¼·åˆ¶è·³éå»£å‘Šï¼Œä¸€å¾‹ä¸çµ¦çå‹µ
           currentstate = State.IDLE;
           return;
         },
           ()=>{
-          //ª±®a½T¹ê¦³¬İ§¹¼s§i¡Aµ¹¤©¼úÀy
+          //ç©å®¶ç¢ºå¯¦æœ‰çœ‹å®Œå»£å‘Šï¼Œçµ¦äºˆçå‹µ
           GetAdReward(config.boxADReward.Type,config.boxADReward.Num);
           currentstate = State.IDLE;
           return;
         },
           ()=>{
-             //ÁÙ¬O­nµ¹skip ad¼úÀy
+             //é‚„æ˜¯è¦çµ¦skip adçå‹µ
             ItmeType skiptype = config.boxADReward.SkipType;
             string rewardtype = skiptype.ToString();
             int rewardnum = config.boxADReward.SkipNum;
@@ -620,7 +618,7 @@ public class MazeScene : MonoBehaviour,IScene
         return;
       },
       ()=>{
-        //¿ï¾Ü¤£¬İ¼s§i
+        //é¸æ“‡ä¸çœ‹å»£å‘Š
         //
         GetAdReward(config.boxADReward.SkipType,config.boxADReward.SkipNum);
         currentstate = State.IDLE;
@@ -641,8 +639,8 @@ public class MazeScene : MonoBehaviour,IScene
 
   }
 
-  //¯à»İ­n®Ú¾Ú¬ü³Nªº³]­p½Õ¾ã¾ã®y°g®cªº¤¤¤ßÂI¦ì¸m
-  //³o¸Ì»İ­n¦^¶ÇTOPUIªº¤U½tY¦ì¸m
+  //èƒ½éœ€è¦æ ¹æ“šç¾è¡“çš„è¨­è¨ˆèª¿æ•´æ•´åº§è¿·å®®çš„ä¸­å¿ƒé»ä½ç½®
+  //é€™è£¡éœ€è¦å›å‚³TOPUIçš„ä¸‹ç·£Yä½ç½®
   public float GetMazeTopUIBottom(){
     
     float topuiHight = mRoot.transform.Find("TopUI/bg").GetComponent<SpriteRenderer>().sprite.bounds.size.y;
@@ -663,7 +661,7 @@ public class MazeScene : MonoBehaviour,IScene
   }
 
   void updateUI(){
-    //§ó·s¹D¨ã¼Æ¶q
+    //æ›´æ–°é“å…·æ•¸é‡
     mRoot.transform.Find("DownUI/bg/Torchbt/amount").GetComponent<TextMeshPro>().text = "X" + PlayerPrefsManager._PlayerPrefsManager.Item1Num;
     mRoot.transform.Find("DownUI/bg/oillampbt/amount").GetComponent<TextMeshPro>().text = "X" + PlayerPrefsManager._PlayerPrefsManager.Item2Num;
   }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ public class TorchManager : MonoBehaviour
   }
 
 
-  //°òÂ¦·Ó«G½d³ò
+  //åŸºç¤ç…§äº®ç¯„åœ
   float basic_Light_Radius = 3.0f;
 
   public void PlaceTorch(Vector2 position, float scale){
@@ -33,7 +33,7 @@ public class TorchManager : MonoBehaviour
 
     if (icon != null)
     {
-      float iconscale = scale / icon.bounds.size.x;//®Ú¾Ú¹Ï¸ê­«·s­pºâscale¤j¤p
+      float iconscale = scale / icon.bounds.size.x;//æ ¹æ“šåœ–è³‡é‡æ–°è¨ˆç®—scaleå¤§å°
       icon_go.transform.localScale = new Vector3(iconscale, iconscale, 0.0f);
     }
 
@@ -43,7 +43,7 @@ public class TorchManager : MonoBehaviour
     Sprite mask = mask_go.GetComponent<SpriteMask>().sprite;
 
     if (mask != null){
-      float iconscale = scale / mask.bounds.size.x;//®Ú¾Ú¹Ï¸ê­«·s­pºâscale¤j¤p
+      float iconscale = scale / mask.bounds.size.x;//æ ¹æ“šåœ–è³‡é‡æ–°è¨ˆç®—scaleå¤§å°
       tmp.transform.Find("mask").localScale = new Vector3(basic_Light_Radius * iconscale, basic_Light_Radius * iconscale, 1.0f);
     }
 

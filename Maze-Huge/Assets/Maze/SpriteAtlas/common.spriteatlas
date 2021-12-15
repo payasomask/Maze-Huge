@@ -40,65 +40,99 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 1
       enableTightPacking: 1
+      enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 40ef02399cd6a6b429b0ee302da2f08d, type: 3}
-    totalSpriteSurfaceArea: 2868131
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: b0930630a3613d2439a57af1aa30188b, type: 3}
   - {fileID: 21300000, guid: ded57f60285fa1a47b65677b33dad52c, type: 3}
+  - {fileID: 21300000, guid: 406da502272fad247b0eec2d53931f69, type: 3}
+  - {fileID: 21300000, guid: b0a52a12da2c8df4a973847d52607a19, type: 3}
+  - {fileID: 21300000, guid: 6d1f1f620cc405c4bafc2c0f6ddf1da6, type: 3}
+  - {fileID: 21300000, guid: 7db8c972529b87044a6cf2ce030891b6, type: 3}
   - {fileID: 21300000, guid: 531aeae24e331374ab206f06173cf70b, type: 3}
   - {fileID: 21300000, guid: 7712af53838e4944d8eee507832a14d5, type: 3}
+  - {fileID: 21300000, guid: 55434063055fe67448c0484adcec8284, type: 3}
   - {fileID: 21300000, guid: 01ceb5830cd1e844d86f8ca3f6754b54, type: 3}
   - {fileID: 21300000, guid: 906b01f3690cad246bbcc67646de6a17, type: 3}
   - {fileID: 21300000, guid: 422f94044bcda7143acf3a27f2d3754b, type: 3}
   - {fileID: 21300000, guid: fccc571430e0f7d46af02f6f928be28f, type: 3}
+  - {fileID: 21300000, guid: 3cf7d584a05be904bbff3ba69f780dea, type: 3}
   - {fileID: 21300000, guid: 7464be8423d74b6408fc6a5ae54e945c, type: 3}
+  - {fileID: 21300000, guid: 8d6ad1a592b405a4f8ee78b6089f48c2, type: 3}
   - {fileID: 21300000, guid: 64bea806cc3daf9439e30c0545d96874, type: 3}
+  - {fileID: 21300000, guid: b4fc141731af09a4fb5f1c82d58f5af3, type: 3}
   - {fileID: 21300000, guid: 487b3e67e4a6df7488756178563d7488, type: 3}
+  - {fileID: 21300000, guid: 3d9b7a7895115404892e4b8a8e8e1637, type: 3}
+  - {fileID: 21300000, guid: 36c6d0a83beb934479f7510e926846da, type: 3}
   - {fileID: 21300000, guid: 47d772b83ce7e3b419a97fc10caf0dbf, type: 3}
   - {fileID: 21300000, guid: 8b969cd87a9751b418b10ceefd7c9b04, type: 3}
   - {fileID: 21300000, guid: 7d1d79e8ed6700048baf9773c8a0bc70, type: 3}
   - {fileID: 21300000, guid: 25d1bce8f775da34e91fd6b006f5ac7c, type: 3}
+  - {fileID: 21300000, guid: 37e96a29e771ea641b07f1ba56593704, type: 3}
   - {fileID: 21300000, guid: e7e9c339ac831cd4a93e4a54e57958b1, type: 3}
   - {fileID: 21300000, guid: 441863592d8f79e44b5aca50d2be2c15, type: 3}
   - {fileID: 21300000, guid: 42bb4a5989466bb4685c3b0a8115d553, type: 3}
   - {fileID: 21300000, guid: f23cfe5ad851c3444a7a5278011b0cf6, type: 3}
   - {fileID: 21300000, guid: 9f8d058a741d78143931d027516c1086, type: 3}
+  - {fileID: 21300000, guid: 7caad8fab8b2412498bfe70df7aa18c0, type: 3}
   - {fileID: 21300000, guid: 8067bf1b66ce701448d84622fb7120b9, type: 3}
+  - {fileID: 21300000, guid: cf07cabc6910aae45a63b2f636598088, type: 3}
+  - {fileID: 21300000, guid: 4785b3fc3b6317e47ba6fa961f0e11f6, type: 3}
   - {fileID: 21300000, guid: ad8af2fd0b3ebd54baf24ba2e3e6bf94, type: 3}
   - {fileID: 21300000, guid: d390a41ebe5f83c4e89a77f66936760c, type: 3}
   - {fileID: 21300000, guid: 3fa2626e2c1d33f4c8861f93f13daa11, type: 3}
   - {fileID: 21300000, guid: bdec303fc86e6f74cbfcf9db0bce022a, type: 3}
+  - {fileID: 21300000, guid: d5af625f0884c424e860989f439e3628, type: 3}
+  - {fileID: 21300000, guid: 5298eb6f97a2aef49aa307d734bf2089, type: 3}
   m_PackedSpriteNamesToIndex:
+  - maze_wall_0111
   - play_gray
+  - maze_floor
+  - maze_wall_1101
+  - maze_wall_0010
+  - maze_wall_0001
   - item_ban_cover
   - bottom_bar
+  - maze_wall_1110
   - white_pt
   - toch
   - play
   - main_board
+  - maze_wall_1001
   - lamp
+  - maze_wall_1100
   - button_banner
+  - maze_wall_1000
   - intro
+  - maze_wall_0110
+  - maze_wall_1010
   - light_maze
   - message_board
   - top_bar
   - no_button
+  - maze_wall_0100
   - treasure_box
   - info_banner
   - 8x8
   - inn_point
   - main
+  - maze_wall_0000
   - dark_maze
+  - maze_wall_0101
+  - maze_wall_1011
   - yes_button
   - button
   - pause
   - player_mark
+  - maze_wall
+  - maze_wall_0011
   m_RenderDataMap: {}
   m_Tag: common
   m_IsVariant: 0

@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class MazeGoalController : MonoBehaviour
 {
+  [SerializeField]
+  [Range(0f, 1f)]
+  private float size_factor = 1.0f;
   private int currentx, currenty;
   private int maskid; 
   public void init(int currentx, int currenty, float maze_size)
   {
     this.currentx = currentx;
     this.currenty = currenty;
-    //·PÄ±3­¿ªºmaze_size¤ñ¸ûµÎªA
+    //æ„Ÿè¦º3å€çš„maze_sizeæ¯”è¼ƒèˆ’æœ
     float scale = 3.0f;
     GameObject icon_go = transform.Find("Icon").gameObject;
     Sprite icon = icon_go.GetComponent<SpriteRenderer>().sprite;
     if (icon != null){
-      float iconscale = maze_size / icon.bounds.size.x;//®Ú¾Ú¹Ï¸ê­«·s­pºâscale¤j¤p
-      icon_go.transform.localScale = new Vector3(iconscale, iconscale, 0.0f);
+      float iconscale = maze_size / icon.bounds.size.x;//æ ¹æ“šåœ–è³‡é‡æ–°è¨ˆç®—scaleå¤§å°
+      icon_go.transform.localScale = new Vector3(iconscale* size_factor, iconscale* size_factor, 0.0f);
     }
     //gameObject.transform.localScale = new Vector3(maze_size, maze_size, 1.0f);
     maskid = MaskManager._MaskManager.AddMask(transform, "goal", scale * maze_size);

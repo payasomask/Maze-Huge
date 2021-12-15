@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2012 Calvin Rien
  *
  * Based on the JSON parser by Patrick van Bergen

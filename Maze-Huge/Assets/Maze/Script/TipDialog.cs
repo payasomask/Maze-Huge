@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -50,7 +50,7 @@ public class TipDialog :  IDialogContext
   {
     if(type == UIEventType.BUTTON){
       if(name == "dialog_Yes_bt"){
-        AudioController._AudioController.playOverlapEffect("yes_no_¨Ï¥Î¹D¨ã_«öÁä­µ®Ä");
+        AudioController._AudioController.playOverlapEffect("yes_no_ä½¿ç”¨é“å…·_æŒ‰éµéŸ³æ•ˆ");
         if (bt_handlers != null)
           bt_handlers();
         return DialogResponse.TAKEN_AND_DISMISS;

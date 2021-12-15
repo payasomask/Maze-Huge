@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,9 @@ public class MazePlayerController : MonoBehaviour
 {
   [SerializeField]
   private float basic_speed = 10.0f;
+  [SerializeField]
+  [Range(0f,1f)]
+  private float size_factor = 1.0f;
   private float maze_size;
   //玩家火光範圍
   float maskscale = 3.0f;
@@ -47,7 +50,7 @@ public class MazePlayerController : MonoBehaviour
     Sprite icon = icon_go.GetComponent<SpriteRenderer>().sprite;
     if (icon != null){
       float iconscale = maze_size / icon.bounds.size.x;//根據圖資重新計算scale大小
-      icon_go.transform.localScale = new Vector3(iconscale, iconscale, 0.0f);
+      icon_go.transform.localScale = new Vector3(iconscale * size_factor, iconscale * size_factor, 0.0f);
     }
 
     LineRenderer = gameObject.GetComponent<LineRenderer>();

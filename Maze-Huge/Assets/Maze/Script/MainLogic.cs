@@ -5,7 +5,7 @@ using TMPro;
 using System;
 
 public delegate void CommonAction(); //the CommonAction should works like C# Action
-//針對InteractiveDiaLogHandler做的行為
+//??InteractiveDiaLogHandler??銵
 public delegate void InteractiveDiaLogHandler();
 public class PlayerPrefsManager
 {
@@ -148,7 +148,11 @@ public class PlayerPrefsManager
     if (PlayerPrefs.HasKey(RecordKey)){
       string record_string = PlayerPrefs.GetString(RecordKey);
       _mazerecord = Newtonsoft.Json.JsonConvert.DeserializeObject<MazeRecord>(record_string);
-      Debug.Log("548 - Record exist  ");
+      Debug.Log("548 - Record exist ");
+      if (_mazerecord.RecordVersion != MainLogic._MainLogic.RecordVersion) {
+        Debug.Log("548 - RecordVersion defferent..delete MazeRecord");
+        clearRecord();
+      }
     }
   }
 
@@ -236,11 +240,11 @@ public class PlayerPrefsManager
   public void GetRewrd(ItmeType type,int Num){
     if (type == ItmeType.Item1){
       Item1Num += Num;
-      Debug.Log("454 - GetReward : " + type + "，Earned : " + Num + "，current :" + Item1Num);
+      Debug.Log("454 - GetReward : " + type + "嚗arned : " + Num + "嚗urrent :" + Item1Num);
     }
     else if(type == ItmeType.Item2){
       Item2Num += Num;
-      Debug.Log("454 - GetReward : " + type + "，Earned : " + Num + "，current :" + Item2Num);
+      Debug.Log("454 - GetReward : " + type + "嚗arned : " + Num + "嚗urrent :" + Item2Num);
     }
   }
 
@@ -252,7 +256,7 @@ public class PlayerPrefsManager
     _PlayerPrefsManager = new PlayerPrefsManager();
   }
 
-  //檢查暫存資料有沒有異常..
+  //瑼Ｘ?怠?鞈????撣?.
   public bool checkPlayerPrefsDATA(){
     if (PlayerPrefs.HasKey("PlayerPrefs_Ver")){
       string ver = PlayerPrefs.GetString("PlayerPrefs_Ver");
@@ -266,7 +270,7 @@ public class PlayerPrefsManager
     return true;
   }
 
-  public void loginsetting()//登陸遊戲後需要設定的參數
+  public void loginsetting()//?駁?敺?閬身摰??
   {
     //if (PlayerPrefs.HasKey(GetFriendsCardsTimeKey))
     //  _GetFriendsCardsTime = new DateTime().ToString();
@@ -308,8 +312,8 @@ public class PlayerPrefsManager
   public void OnPause()
   {
     Debug.Log("app paused by user...");
-    //AddpauseSaveDic(GetFriendsCardsTimeKey, GetFriendsCardsTime);//暫存參數
-    //GetFriendsCardsTime = new DateTime().ToString();//重置取得FB好友隊伍的時間
+    //AddpauseSaveDic(GetFriendsCardsTimeKey, GetFriendsCardsTime);//?怠??
+    //GetFriendsCardsTime = new DateTime().ToString();//?蔭??FB憟賢???????
   }
   public void OnFocus()
   {
@@ -319,7 +323,7 @@ public class PlayerPrefsManager
 
   void AddpauseSaveDic(string name, object value)
   {
-    Debug.Log("將 " + name + " value : " + (string)value+ "存入暫存Dic");
+    Debug.Log("撠?" + name + " value : " + (string)value+ "摮?怠?Dic");
     if (pauseSaveDic.ContainsKey(name))
       pauseSaveDic[name] = value;
     else
@@ -329,7 +333,7 @@ public class PlayerPrefsManager
   object LoadpauseSaveDic(string key)
   {
     if (pauseSaveDic.ContainsKey(key)){
-      Debug.Log("從 存入暫存Dic 讀出 Key : " + key + " value : " + (string)pauseSaveDic[key]);
+      Debug.Log("敺?摮?怠?Dic 霈??Key : " + key + " value : " + (string)pauseSaveDic[key]);
       return pauseSaveDic[key];
     }
     return null;
@@ -489,6 +493,9 @@ public class PlayerPrefsManager
 
 public class MainLogic : MonoBehaviour
 {
+  //紀錄版本號，當Json版本號與此不同，Json存檔將捨棄不用
+  [SerializeField]
+  public int RecordVersion;
 
   public static MainLogic _MainLogic = null;
   private GameObject camera_go = null;
@@ -762,14 +769,13 @@ public class MainLogic : MonoBehaviour
     //Create First Scene
     //
     Debug.Log("transit to first scene...");
-    //mCurrentSceneTransition = new SceneTransition("IntroScene", new object[] { }, delegate ()
+    mCurrentSceneTransition = new SceneTransition("IntroScene", new object[] { }, delegate () {
+      mCurrentSceneTransition = null;
+    });
+    //mCurrentSceneTransition = new SceneTransition("MazeScene", new object[] { }, delegate ()
     //{
     //  mCurrentSceneTransition = null;
     //});
-    mCurrentSceneTransition = new SceneTransition("MazeScene", new object[] { }, delegate ()
-    {
-      mCurrentSceneTransition = null;
-    });
     //mCurrentSceneTransition = new SceneTransition("LobbyScene", new object[] { }, delegate ()
     //{
     //  mCurrentSceneTransition = null;
@@ -807,7 +813,7 @@ public class MainLogic : MonoBehaviour
     }
 
     if (Input.GetKeyUp(KeyCode.Escape))
-    {//裝置KeyCode.Escape統一從這邊觸發
+    {//鋆蔭KeyCode.Escape蝯曹?敺?閫貊
       setUIEvent("back_bt", UIEventType.BUTTON, null);
       return;
     }
@@ -837,7 +843,7 @@ public class MainLogic : MonoBehaviour
   {
     if (mCurrentSceneTransition != null)
     {
-      //假如正在換 scene 則取消指令
+      //??甇???scene ??瘨?隞?
       Debug.Log("181 - scene transition is processing...");
       return;
     }
@@ -914,6 +920,7 @@ public class MainLogic : MonoBehaviour
       {
         mCurrentSceneTransition = new SceneTransition("LobbyScene", new object[] { }, delegate ()
         {
+          PlayerPrefsManager._PlayerPrefsManager.clearRecord();
           mCurrentSceneTransition = null;
         }, true);
       }
@@ -940,10 +947,10 @@ public class MainLogic : MonoBehaviour
   }
 
 
-  //Android 測試 開啟分頁模式離開遊戲 會先呼叫OnApplicationFocus(false)接著呼叫OnApplicationPause(true)
-  //Android 測試 從分頁模式返回遊戲 會先呼叫OnApplicationFocus(true)接著呼叫OnApplicationPause(false)
-  //mono 模擬器測試 開啟分頁模式離開遊戲 會先呼叫OnApplicationPause(true)接著呼叫OnApplicationFocus(false)
-  //mono 模擬器測試 從分頁模式返回遊戲 會先呼叫OnApplicationFocus(true)接著呼叫OnApplicationPause(false)
+  //Android 皜祈岫 ????璅∪??ａ?? ???澆OnApplicationFocus(false)?亥??澆OnApplicationPause(true)
+  //Android 皜祈岫 敺??芋撘????????澆OnApplicationFocus(true)?亥??澆OnApplicationPause(false)
+  //mono 璅⊥?冽葫閰?????璅∪??ａ?? ???澆OnApplicationPause(true)?亥??澆OnApplicationFocus(false)
+  //mono 璅⊥?冽葫閰?敺??芋撘????????澆OnApplicationFocus(true)?亥??澆OnApplicationPause(false)
   bool ispause = false;
   bool isfocus = true;
   void OnApplicationPause(bool pause)
@@ -952,7 +959,7 @@ public class MainLogic : MonoBehaviour
     ispause = pause;
     if (/*!isfocus &&*/ ispause)
     {
-      //玩家將遊戲暫停...
+      //?拙振撠??脫??..
       PlayerPrefsManager._PlayerPrefsManager.OnPause();
     }
   }
@@ -967,10 +974,10 @@ public class MainLogic : MonoBehaviour
     }
   }
 
-  //處理需要在遊戲關閉後重置的參數
+  //???閬???敺?蝵桃??
   void OnApplicationQuit()
   {
-    //這個只能用在Unity Editor 或是經由 程式碼的Application.Quit(); 才會被呼叫，若Android平台用分頁模式直接關閉遊戲 則不會有任何反應
+    //??賜?沃nity Editor ?蝬 蝔?蝣潛?Application.Quit(); ??鋡怠?恬??丕ndroid撟喳?典??芋撘?仿?????????隞颱???
     PlayerPrefsManager._PlayerPrefsManager.OnPause();
   }
 

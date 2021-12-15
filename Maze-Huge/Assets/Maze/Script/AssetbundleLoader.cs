@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using UnityEditor;
 #endif
 
@@ -84,48 +84,60 @@ public class AssetbundleLoader{
     return GameObject.Instantiate(prefabeObj);
   }
 
-//  public TMPro.TMP_FontAsset InstantiateFontAsset(string font_asset_name){
-//    if (mEditorMode){
-//#if UNITY_EDITOR
-//      if (mAssetNamePathMapper.ContainsKey(font_asset_name)==false){
-//        Debug.LogWarning("font asset "+font_asset_name+" not found");
-//        return null;
-//      }
-//      return (TMPro.TMP_FontAsset)AssetDatabase.LoadAssetAtPath<TMPro.TMP_FontAsset>(mAssetNamePathMapper[font_asset_name]);
-//#endif
-//    }
+  public GameObject GetPrefab(string prefabName) {
 
-//    if (mPrefabMap.ContainsKey(font_asset_name)==false)
-//      return null;
 
-//    TMPro.TMP_FontAsset tmp_go =(TMPro.TMP_FontAsset)loadScriptableObject(font_asset_name);
-//    if (bAdvancedLog)
-//      Debug.Log("280 - load fonat asset "+font_asset_name);
+    GameObject prefabeObj = PrefabManager._PrefabManager.GetPrefab(prefabName);
 
-//    return tmp_go;
-//  }
+    if (prefabeObj == null)
+      return null;
 
-//  public TextAsset InstantiateTextAsset(string asset_name){
-//    if (mEditorMode){
-//#if UNITY_EDITOR
-//      if (mAssetNamePathMapper.ContainsKey(asset_name)==false){
-//        Debug.LogWarning("textasset "+asset_name+" not found");
-//        return null;
-//      }
-//      return (TextAsset)AssetDatabase.LoadAssetAtPath<TextAsset>(mAssetNamePathMapper[asset_name]);
-//#endif
-//    }
 
-//    if (mPrefabMap.ContainsKey(asset_name)==false)
-//      return null;
+    return prefabeObj;
+  }
 
-//    TextAsset tmp_go =(TextAsset)loadTextAsset(asset_name);
-//    if (bAdvancedLog)
-//      Debug.Log("280 - load text asset "+asset_name);
+  //  public TMPro.TMP_FontAsset InstantiateFontAsset(string font_asset_name){
+  //    if (mEditorMode){
+  //#if UNITY_EDITOR
+  //      if (mAssetNamePathMapper.ContainsKey(font_asset_name)==false){
+  //        Debug.LogWarning("font asset "+font_asset_name+" not found");
+  //        return null;
+  //      }
+  //      return (TMPro.TMP_FontAsset)AssetDatabase.LoadAssetAtPath<TMPro.TMP_FontAsset>(mAssetNamePathMapper[font_asset_name]);
+  //#endif
+  //    }
 
-//    return tmp_go;
+  //    if (mPrefabMap.ContainsKey(font_asset_name)==false)
+  //      return null;
 
-//  }
+  //    TMPro.TMP_FontAsset tmp_go =(TMPro.TMP_FontAsset)loadScriptableObject(font_asset_name);
+  //    if (bAdvancedLog)
+  //      Debug.Log("280 - load fonat asset "+font_asset_name);
+
+  //    return tmp_go;
+  //  }
+
+  //  public TextAsset InstantiateTextAsset(string asset_name){
+  //    if (mEditorMode){
+  //#if UNITY_EDITOR
+  //      if (mAssetNamePathMapper.ContainsKey(asset_name)==false){
+  //        Debug.LogWarning("textasset "+asset_name+" not found");
+  //        return null;
+  //      }
+  //      return (TextAsset)AssetDatabase.LoadAssetAtPath<TextAsset>(mAssetNamePathMapper[asset_name]);
+  //#endif
+  //    }
+
+  //    if (mPrefabMap.ContainsKey(asset_name)==false)
+  //      return null;
+
+  //    TextAsset tmp_go =(TextAsset)loadTextAsset(asset_name);
+  //    if (bAdvancedLog)
+  //      Debug.Log("280 - load text asset "+asset_name);
+
+  //    return tmp_go;
+
+  //  }
 
 
   Dictionary<string, AudioClip> mAudioClipCache =new Dictionary<string, AudioClip>();

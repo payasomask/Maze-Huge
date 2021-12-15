@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//¬°¥ş«Ìªº¾B¸n¡A¤ñ¸û¨S¦³¼u©Ê¥u¯à¾B¸n¤@­Ó¹Ï§Î
+//ç‚ºå…¨å±çš„é®ç½©ï¼Œæ¯”è¼ƒæ²’æœ‰å½ˆæ€§åªèƒ½é®ç½©ä¸€å€‹åœ–å½¢
 public class CanvasMaskManager : MonoBehaviour
 {
   public static CanvasMaskManager _MazeMaskManager = null;

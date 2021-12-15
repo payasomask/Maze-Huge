@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -83,14 +83,14 @@ public class LobbyScene : MonoBehaviour,IScene
     if(type == UIEventType.BUTTON){
       if(name == "PlayDark_bt")
       {
-        AudioController._AudioController.playOverlapEffect("¤jÆUÂIÀ»Class Icon­µ®Ä");
+        AudioController._AudioController.playOverlapEffect("å¤§å»³é»žæ“ŠClass IconéŸ³æ•ˆ");
         //Debug.Log("Play_bt");
         pDisposeHandler(SceneDisposeReason.USER_ACTION, new object[] { 0});
         AdsHelper._AdsHelper.DismissRectangleBannerAds();
       }
       else if (name == "Play_bt")
       {
-        AudioController._AudioController.playOverlapEffect("¤jÆUÂIÀ»Class Icon­µ®Ä");
+        AudioController._AudioController.playOverlapEffect("å¤§å»³é»žæ“ŠClass IconéŸ³æ•ˆ");
         //Debug.Log("Play_bt");
         pDisposeHandler(SceneDisposeReason.USER_ACTION, new object[] { 0});
         AdsHelper._AdsHelper.DismissRectangleBannerAds();

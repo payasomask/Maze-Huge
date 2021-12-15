@@ -1,11 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 using System.Collections.Generic;
 
 public class UIButton : MonoBehaviour, ITouchEventReceiver {
 
-  public enum PressAction//按鈕touch後的行為總類
+  public enum PressAction//??touch敺?銵蝮賡?
   {
     ChangeSprite,
     Animator
@@ -22,19 +22,19 @@ public class UIButton : MonoBehaviour, ITouchEventReceiver {
   public string disabledState_atlasName = null;
   public string disabledState_spriteName = null;
 
-  //是否傳遞訊息 (此 ui 底下的 ui controller 不對 touch event 有反應)
+  //?臬?喲?閮 (甇?ui 摨???ui controller 銝? touch event ????
   public bool passTouchEvent =true;
   public bool passClickEvent =false;
 
   MainLogic tmpMainLogic =null;
 
-  //此按鈕 LONG_PRESS 的時間
+  //甇斗???LONG_PRESS ????
   public float longPressDuration =0.7f;
 
-  public PressAction CurrentAction = PressAction.ChangeSprite;//Start自動判斷
+  public PressAction CurrentAction = PressAction.ChangeSprite;//Start?芸??斗
   Animator ani = null;
-  string press_trigger_name = "press";//touch時triggername
-  string level_trigger_name = "idle";//level時triggername
+  string press_trigger_name = "press";//touch?riggername
+  string level_trigger_name = "idle";//level?riggername
   bool Idling = true;
 
   Sprite[] button_label_str =null;//normal, pressed, disabled
@@ -42,7 +42,7 @@ public class UIButton : MonoBehaviour, ITouchEventReceiver {
 
   // Use this for initialization
   void Start () {
-    //根據該物件有沒有Animator 切換按鈕touch行為
+    //?寞?閰脩隞嗆?瘝?Animator ????touch銵
     ani = GetComponent<Animator>();
     if (ani != null)
       CurrentAction = PressAction.Animator;
@@ -57,7 +57,7 @@ public class UIButton : MonoBehaviour, ITouchEventReceiver {
 
 	}
   public bool btn_enabled = true;
-  //1225 Ray : 卡庫部分按鈕(powerup、evolve)就算btn_enabled = false ，還是有Click的需求(顯示為何btn_enabled = false的資訊)
+  //1225 Ray : ?∪澈?典???(powerup?volve)撠梁?btn_enabled = false 嚗??舀?Click??瘙?憿舐內?箔?btn_enabled = false??閮?
   bool Not_enabled_can_OnClick = false;
   public void setEnabled(bool enable, bool Emit_OnClick_When_Disabled = false) {
     btn_enabled = enable;
@@ -66,13 +66,13 @@ public class UIButton : MonoBehaviour, ITouchEventReceiver {
       sr = GetComponent<SpriteRenderer>();
     }
 
-    if(sr == null){//如果是動畫模式...
-      //直接全部chirl掃一遍
+    if(sr == null){//憒??臬??急芋撘?..
+      //?湔?券chirl????
       SpriteRenderer[] allch = GetComponentsInChildren<SpriteRenderer>(true);
       foreach(SpriteRenderer s in allch){
         if (s.sprite == null)
           continue;
-        if (s.GetComponent<UIButton>() != null)//跳過有bt角本的子物件
+        if (s.GetComponent<UIButton>() != null)//頝喲??t閫???拐辣
           continue;
         Sprite sprite_from_ml_sprite = find_sprite(s.sprite.name);
         if (sprite_from_ml_sprite == null)
@@ -85,8 +85,8 @@ public class UIButton : MonoBehaviour, ITouchEventReceiver {
     createStringGo();
 
     if (enable == true) {
-      //1127 卡庫的篩選按鈕沒有被點過的話normalState會是null，當setEnabled(true)的時候會變成sr.sprite == Null
-      //所以增加一個判斷
+      //1127 ?∪澈?祟?豢????◤暺??店normalState?null嚗setEnabled(true)????霈?sr.sprite == Null
+      //?隞亙??????
       if (normalState == null)
         normalState = sr.sprite;
 
@@ -178,10 +178,10 @@ public class UIButton : MonoBehaviour, ITouchEventReceiver {
       //ani = GetComponent<Animator>();
       if (ani == null)
       {
-        Debug.Log("UIButton物件 : " + name + "，Touch行為 : " + CurrentAction + "，但是該物件上沒有animator");
+        Debug.Log("UIButton?拐辣 : " + name + "嚗ouch銵 : " + CurrentAction + "嚗??航府?拐辣銝??nimator");
         return !passTouchEvent;
       }
-      //Debug.Log("UIButton物件 : " + name + "SetTrigger -- " + press_trigger_name);
+      //Debug.Log("UIButton?拐辣 : " + name + "SetTrigger -- " + press_trigger_name);
       ani.SetTrigger(press_trigger_name);
       Idling = false;
       return !passTouchEvent;
@@ -210,7 +210,7 @@ public class UIButton : MonoBehaviour, ITouchEventReceiver {
     }
 
     if (hoverState !=null){
-      //0113 Ray : 卡庫中有部分按鈕需要更換hoverState的圖，在這裡判斷sprite的name是不是equals hoverState_spriteName
+      //0113 Ray : ?∪澈銝剜??典????閬?overState??嚗?ㄐ?斗sprite?ame?臭??疾quals hoverState_spriteName
       if (!hoverState.name.Equals(hoverState_spriteName)){
         Debug.Log("hoverState_spriteName was changed.. reload Hoversprite...");
         AssetbundleLoader ab = AssetbundleLoader._AssetbundleLoader;
@@ -235,17 +235,17 @@ public class UIButton : MonoBehaviour, ITouchEventReceiver {
     // Debug.Log("leave touch");
     if (CurrentAction == PressAction.Animator)
     {
-      //0329 Ray: 發現當CurrentAction == PressAction.Animator 的 UIButton 不是focus的情況下會先被呼叫一次OnTouchLeave，
-      //導致先被 trigger "idle" 的表現異常(下次press的時候會馬上被切回idle) ， 加一個旗標判斷現在是不是已經回到idle，ture 就直接return 不再次trigger "idle"
+      //0329 Ray: ?潛?詆urrentAction == PressAction.Animator ??UIButton 銝focus??瘜???鋡怠?思?甈﹒nTouchLeave嚗?
+      //撠?◤ trigger "idle" ?”?曄撣?銝活press????擐砌?鋡怠??dle) 嚗?????璅?瑞?冽銝撌脩??idle嚗ure 撠梁?叵eturn 銝?甈﹀rigger "idle"
       if (Idling)
         return;
 
       if (ani == null)
       {
-        Debug.Log("UIButton物件 : " + name + "，Touch行為 : " + CurrentAction + "，但是該物件上沒有animator");
+        Debug.Log("UIButton?拐辣 : " + name + "嚗ouch銵 : " + CurrentAction + "嚗??航府?拐辣銝??nimator");
         return ;
       }
-      //Debug.Log("UIButton物件 : " + name + "SetTrigger -- " + level_trigger_name);
+      //Debug.Log("UIButton?拐辣 : " + name + "SetTrigger -- " + level_trigger_name);
       ani.SetTrigger(level_trigger_name);
       Idling = true;
       return ;
@@ -291,7 +291,7 @@ public class UIButton : MonoBehaviour, ITouchEventReceiver {
       return;
     }
 
-    if (sr.sprite == null)//按鈕沒有圖就沒有必要生字
+    if (sr.sprite == null)//??瘝??停瘝?敹???
       return ;
 
     if (hoverState_atlasName == null && disabledState_atlasName == null)
@@ -309,7 +309,7 @@ public class UIButton : MonoBehaviour, ITouchEventReceiver {
     button_label_str[1] =find_sprite(hoverState_spriteName);
     button_label_str[2] =find_sprite(disabledState_spriteName);
 
-    //如果是btn_enabled false 檢查有沒有button_label_str[2] ， 不能讓字是空的 先用button_label_str[0] 來顯示
+    //憒??畜tn_enabled false 瑼Ｘ???utton_label_str[2] 嚗?銝霈??舐征???button_label_str[0] 靘＊蝷?
     string_sr.sprite =btn_enabled?button_label_str[0]: button_label_str[2] == null ? button_label_str[0] : button_label_str[2];
 
   }

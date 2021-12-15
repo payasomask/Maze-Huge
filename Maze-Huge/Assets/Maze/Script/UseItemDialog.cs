@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -58,13 +58,13 @@ public class UseItemDialog :  IDialogContext
   {
     if(type == UIEventType.BUTTON){
       if(name == "dialog_Yes_bt"){
-        AudioController._AudioController.playOverlapEffect("yes_no_¨Ï¥Î¹D¨ã_«öÁä­µ®Ä");
+        AudioController._AudioController.playOverlapEffect("yes_no_ä½¿ç”¨é“å…·_æŒ‰éµéŸ³æ•ˆ");
         if (bt_handlers[1] != null)
           bt_handlers[1]();
         return DialogResponse.TAKEN_AND_DISMISS;
       }
       else if(name == "dialog_No_bt"){
-        AudioController._AudioController.playOverlapEffect("yes_no_¨Ï¥Î¹D¨ã_«öÁä­µ®Ä");
+        AudioController._AudioController.playOverlapEffect("yes_no_ä½¿ç”¨é“å…·_æŒ‰éµéŸ³æ•ˆ");
         if (bt_handlers[0] != null)
           bt_handlers[0]();
         return DialogResponse.TAKEN_AND_DISMISS;

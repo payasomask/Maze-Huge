@@ -1,8 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//���a�ϥιD��޲z
+//玩家使用道具管理
 public class PlayerItemManager : MonoBehaviour
 {
   public static PlayerItemManager _PlayerItemManager = null;

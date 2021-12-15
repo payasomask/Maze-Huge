@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -36,6 +36,8 @@ public class PrimsMaze : Maze
 
     addPick_Pool(currentCell.X, currentCell.Y);
 
+    CellSpriteFactory csf = new CellSpriteFactory();
+
     while (PickPool_List.Count > 0) {
       //Debug.Log("currentCell座標 : [" + currentCell .X+"，"+ currentCell.Y +  "]尚有 " + PickPool_List.Count + "個可以選擇Pick的Cell");
 
@@ -57,6 +59,8 @@ public class PrimsMaze : Maze
       currentCell = pickCell;
       currentCell.State = CellState.Visited;
       addPick_Pool(currentCell.X, currentCell.Y);
+      csf.ProcessCell(pickCell);
+      csf.ProcessCell(LinkCell);
 
       removePick_Pool(pickCell);
     }
@@ -242,20 +246,16 @@ public class PrimsMaze : Maze
     //左至右由下至上
     foreach (var v in maze_cell_matrix) 
     {
-      if(v.X == 0)
-        WallBuilder._WallBuilder.BuildBottomWall(v.position(), grid_size);
+      //if(v.X == 0)
+      //  WallBuilder._WallBuilder.BuildBottomWall(v.position(), grid_size);
+      //if (v.Y == 0)
+      //  WallBuilder._WallBuilder.BuildLeftWall(v.position(), grid_size);
+      //if (v.TopWall == true)
+      //  WallBuilder._WallBuilder.BuildTopWall(v.position(), grid_size);      
+      //if (v.RightWall == true)      
+      //  WallBuilder._WallBuilder.BuildRightWall(v.position(), grid_size);
 
-      if (v.Y == 0)
-        WallBuilder._WallBuilder.BuildLeftWall(v.position(), grid_size);
-
-      //if (v.BottomWall == true)
-      //  WallBuilder._WallBuilder.BuildBottomWall(v.position, grid_size);
-      //if (v.LeftWall == true)
-      //  WallBuilder._WallBuilder.BuildLeftWall(v.position, grid_size);
-      if (v.TopWall == true)
-        WallBuilder._WallBuilder.BuildTopWall(v.position(), grid_size);      
-      if (v.RightWall == true)      
-        WallBuilder._WallBuilder.BuildRightWall(v.position(), grid_size);      
+      WallBuilder._WallBuilder.BuildCell(v,grid_size);
     }   
   }
 

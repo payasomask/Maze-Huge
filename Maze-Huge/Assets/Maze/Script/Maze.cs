@@ -100,14 +100,14 @@ public abstract class Maze {
       return;
     }
 
-    //¦pªG¹J¨ì´X­Ó¯S®íÂI°±¤U¨Ó
+    //å¦‚æœé‡åˆ°å¹¾å€‹ç‰¹æ®Šé»åœä¸‹ä¾†
     if (Next.Type == CellType.Start || Next.Type == CellType.Goal || Next.Type == CellType.Box)
       return;
 
     onahead(Next.X,Next.Y, canmovedir[0],ref Cell_list);
   }
 
-  //¨Ì·Ó¤è¦V¡A¨ú±o¸Ó¤è¦Vªº¤U®æCELL
+  //ä¾ç…§æ–¹å‘ï¼Œå–å¾—è©²æ–¹å‘çš„ä¸‹æ ¼CELL
   Cell GetNextCell(int x, int y, Dir movedir){
 
     if (hasWall(x, y, movedir))
@@ -123,7 +123,7 @@ public abstract class Maze {
       return maze_cell_matrix[x, y - 1];
   }
 
-  //§PÂ_¸Ó®y¼Ğcellªº¸Ó¤è¦V¬O¤£¬O¦³Àğªı¾×
+  //åˆ¤æ–·è©²åº§æ¨™cellçš„è©²æ–¹å‘æ˜¯ä¸æ˜¯æœ‰ç‰†é˜»æ“‹
   bool hasWall(int x, int y,Dir movedir){
     if (movedir == Dir.Top)
       return maze_cell_matrix[x, y].TopWall;
@@ -135,8 +135,8 @@ public abstract class Maze {
       return maze_cell_matrix[x, y].RightWall;
   }
 
-  //§PÂ_¸Ócellªº¤W¤U¥ª¥k¤è¦V¨S¦³Àğªı¾×
-  //¨Ó¨ì¸Ó®æªº¤è¦VA -> B ¨º¤è¦V´N¬O©¹¥k
+  //åˆ¤æ–·è©²cellçš„ä¸Šä¸‹å·¦å³æ–¹å‘æ²’æœ‰ç‰†é˜»æ“‹
+  //ä¾†åˆ°è©²æ ¼çš„æ–¹å‘A -> B é‚£æ–¹å‘å°±æ˜¯å¾€å³
   Dir[] DonthasWall(int x, int y, Dir commingdir){
 
     List<Dir> dir_list = new List<Dir>(4);
@@ -154,7 +154,7 @@ public abstract class Maze {
     return dir_list.ToArray();
   }
 
-  //¨ú±o¤Ï¤è¦V
+  //å–å¾—åæ–¹å‘
   Dir counterDir(Dir d){
     if (d == Dir.Bottom)
       return Dir.Top;
@@ -183,6 +183,8 @@ public class Cell
   public bool BottomWall;
   public bool LeftWall;
   public bool RightWall;
+  public string wallSpriteName;
+  public string floorSpriteName;
 
   public Vector2 position(){
     return Jposition.vector2();

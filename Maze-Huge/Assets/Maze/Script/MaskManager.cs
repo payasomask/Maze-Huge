@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ public class MaskManager : MonoBehaviour
     Circle = AssetbundleLoader._AssetbundleLoader.InstantiateSprite("common", "8x8");
   }
 
-  //Åã¥Ü¦b°g®c¸Ì
+  //é¡¯ç¤ºåœ¨è¿·å®®è£¡
   public void ShowMask(string name){
     foreach(var v in mask_dic){
       if(v.Value.name == name){
@@ -41,7 +41,7 @@ public class MaskManager : MonoBehaviour
     }
   }
 
-  //ÁôÂÃ¦b°g®c¸Ì
+  //éš±è—åœ¨è¿·å®®è£¡
   public void HideMask(string name){
     foreach (var v in mask_dic)
     {
@@ -52,7 +52,7 @@ public class MaskManager : MonoBehaviour
     }
   }
 
-  //Åã¥Ü¶Â·t
+  //é¡¯ç¤ºé»‘æš—
   public void ShowBlack(string name)
   {
     foreach (var v in black_dic)
@@ -64,7 +64,7 @@ public class MaskManager : MonoBehaviour
     }
   }
 
-  //Ãö³¬¶Â·t
+  //é—œé–‰é»‘æš—
   public void HideBlack(string name)
   {
     foreach (var v in black_dic)
@@ -77,7 +77,7 @@ public class MaskManager : MonoBehaviour
   }
 
   public void SetMaskScale(string name, float scale){
-    float spirtescale = Circle.bounds.size.x;//®Ú¾Ú­ì¹Ï¤j¤pÁÙ­ì¤ñ¨Ò
+    float spirtescale = Circle.bounds.size.x;//æ ¹æ“šåŸåœ–å¤§å°é‚„åŸæ¯”ä¾‹
 
     foreach (var v in mask_dic)
     {
@@ -97,7 +97,7 @@ public class MaskManager : MonoBehaviour
     MaskData tmp = new MaskData();
     GameObject go = new GameObject(name + "_" + tmpid);
     SpriteMask sr = go.AddComponent<SpriteMask>();
-    float spirtescale = Circle.bounds.size.x;//®Ú¾Ú­ì¹Ï¤j¤pÁÙ­ì¤ñ¨Ò
+    float spirtescale = Circle.bounds.size.x;//æ ¹æ“šåŸåœ–å¤§å°é‚„åŸæ¯”ä¾‹
     sr.sprite = Circle;
     go.transform.SetParent(parent);
     go.transform.localPosition = Vector3.zero;
@@ -122,7 +122,7 @@ public class MaskManager : MonoBehaviour
     GameObject go = new GameObject(name + "_" + blackid);
     go.transform.SetParent(gameObject.transform);
     float depth = -5;
-    //¦]À³°g®c°¾²¾½Õ¾ãblackªº¤¤¤ßÂI
+    //å› æ‡‰è¿·å®®åç§»èª¿æ•´blackçš„ä¸­å¿ƒé»
     float offset_pivot = MazeManager._MazeManager.GetMaze_Pivot();
     go.transform.localPosition = new Vector3(0.0f, offset_pivot, depth);
 

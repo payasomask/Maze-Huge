@@ -4,8 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AdsHelper : MonoBehaviour
-{
+public class AdsHelper : MonoBehaviour {
   public static AdsHelper _AdsHelper = null;
   public bool inited = false;
   //float Adscale;
@@ -18,12 +17,11 @@ public class AdsHelper : MonoBehaviour
   CommonAction OnAdClosed = null;
   CommonAction OnRewardAdEarned = null;
 
-  private void Awake()
-  {
+  private void Awake() {
     _AdsHelper = this;
   }
 
-  public void Update(){
+  public void Update() {
     //if (Input.GetKeyUp(KeyCode.S)){
     //  if (interstitial == null)
     //    return;
@@ -38,23 +36,19 @@ public class AdsHelper : MonoBehaviour
     //}
   }
 
-  public void init()
-  {
+  public void init() {
 #if !UNITY_ANDROID
     return;
 #endif
     Debug.Log("MobileAds init...");
-    MobileAds.Initialize(initStatus =>
-    {
+    MobileAds.Initialize(initStatus => {
       Debug.Log("MobileAds init completed");
 
       Dictionary<string, AdapterStatus> map = initStatus.getAdapterStatusMap();
-      foreach (KeyValuePair<string, AdapterStatus> keyValuePair in map)
-      {
+      foreach (KeyValuePair<string, AdapterStatus> keyValuePair in map) {
         string className = keyValuePair.Key;
         AdapterStatus status = keyValuePair.Value;
-        switch (status.InitializationState)
-        {
+        switch (status.InitializationState) {
           case AdapterState.NotReady:
             // The adapter initialization did not complete.
             Debug.Log("Adapter: " + className + " not ready.");
@@ -69,8 +63,8 @@ public class AdsHelper : MonoBehaviour
       //Adscale = MobileAds.Utils.GetDeviceScale();
       //Debug.Log("645 - GetDeviceScale" + Adscale);
 
-      //EDITOR¸Ì·|¬O0
-      //ANDROID´N¤£¤@©w
+      //EDITORè£¡æœƒæ˜¯0
+      //ANDROIDå°±ä¸ä¸€å®š
       //if (Adscale == 0)
       //{
       //  Adscale = 2.0f;
@@ -93,8 +87,7 @@ public class AdsHelper : MonoBehaviour
   private BannerView RectanglebannerView;
   private BannerView bannerView;
 
-  public void RequestRectangleBannerAds(CommonAction onclosed)
-  {
+  public void RequestRectangleBannerAds(CommonAction onclosed) {
 #if !UNITY_ANDROID
     return;
 #endif
@@ -114,11 +107,11 @@ public class AdsHelper : MonoBehaviour
     //Debug.Log("size.Height" + size.Height);
     //int width = AdSize.GetPortraitAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth).Width;
 
-    //¤£¦P¸Ë¸m¦³¤£¦Pªºdpi¡A¤£¦Pªºdpi¦b¨Ï¥Î©w¸q¦nªºadszie(ex : Banner)®É¡A·|¦]¬°dpi¤£¦P¡A¨ú±o¨ì¤£¦P¤j¤pªºAdsize
-    //·|³y¦¨¤£¦Psize¤j¤pªºªº¼s§iÂĞ»\¡A¶i¦Ó¤£¥i±±¨î..
-    //¦ı¦pªG¨Ï¥Înew AdSizeªº¤è¦¡´N¥i¥H¦b¤£¦Pdpiªº¸Ë¸m¨ú±o¤@¼Ò¤@¼Ë¤j¤p¼s§isize...¦ı¤å¥ó¤W¨S»¡¯à±µ¨üªºsize¬O¦h¤Ö
-    //¨Ï¥Î¤£¤ä´©ªºsize¡A±N·|¾É­Ploadfaild..
-    //¥²¶·¾a¸gÅçªk«h..?
+    //ä¸åŒè£ç½®æœ‰ä¸åŒçš„dpiï¼Œä¸åŒçš„dpiåœ¨ä½¿ç”¨å®šç¾©å¥½çš„adszie(ex : Banner)æ™‚ï¼Œæœƒå› ç‚ºdpiä¸åŒï¼Œå–å¾—åˆ°ä¸åŒå¤§å°çš„Adsize
+    //æœƒé€ æˆä¸åŒsizeå¤§å°çš„çš„å»£å‘Šè¦†è“‹ï¼Œé€²è€Œä¸å¯æ§åˆ¶..
+    //ä½†å¦‚æœä½¿ç”¨new AdSizeçš„æ–¹å¼å°±å¯ä»¥åœ¨ä¸åŒdpiçš„è£ç½®å–å¾—ä¸€æ¨¡ä¸€æ¨£å¤§å°å»£å‘Šsize...ä½†æ–‡ä»¶ä¸Šæ²’èªªèƒ½æ¥å—çš„sizeæ˜¯å¤šå°‘
+    //ä½¿ç”¨ä¸æ”¯æ´çš„sizeï¼Œå°‡æœƒå°è‡´loadfaild..
+    //å¿…é ˆé ç¶“é©—æ³•å‰‡..?
     AdSize size = new AdSize(RectangleBannerSize, RectangleBannerSize);
 #if !UNITY_EDITOR && UNITY_ANDROID
     this.RectanglebannerView = new BannerView(adUnitId, size, AdPosition.Bottom);
@@ -127,7 +120,7 @@ public class AdsHelper : MonoBehaviour
 #endif
     // Create a 320x50 banner at the top of the screen.
 
-    //¦Û­q¸q¦ì¸m¦bandroid¤W¬O¥H¥ª¤W¨¤¬°0.0¥kÃä¬O+X¤U­±¬O+Y
+    //è‡ªè¨‚ç¾©ä½ç½®åœ¨androidä¸Šæ˜¯ä»¥å·¦ä¸Šè§’ç‚º0.0å³é‚Šæ˜¯+Xä¸‹é¢æ˜¯+Y
     //this.RectanglebannerView = new BannerView(adUnitId, AdSize.MediumRectangle, 384, 880);
 
     // Called when an ad request has successfully loaded.
@@ -156,7 +149,7 @@ public class AdsHelper : MonoBehaviour
     //    jc.CallStatic("BANNER", jo,gameObject.name);
     //#endif
   }
-  public void DismissRectangleBannerAds(){
+  public void DismissRectangleBannerAds() {
     if (RectanglebannerView == null)
       return;
 
@@ -164,8 +157,7 @@ public class AdsHelper : MonoBehaviour
     RectanglebannerView = null;
   }
 
-  public void RequestBannerAds(CommonAction onclosed)
-  {
+  public void RequestBannerAds(CommonAction onclosed) {
 #if !UNITY_ANDROID
     return;
 #endif
@@ -180,7 +172,7 @@ public class AdsHelper : MonoBehaviour
             string adUnitId = "unexpected_platform";
 #endif
 
-    //³oºØsizeªº¥u¦³°ª«×(32¡B50)·|¦³¼vÅT¡A¦ı¬O¼e«×¤]¤£¯à¶Ãµ¹..¥Ø«e¥u´ú¥X320¡BAdSize.FullWidth
+    //é€™ç¨®sizeçš„åªæœ‰é«˜åº¦(32ã€50)æœƒæœ‰å½±éŸ¿ï¼Œä½†æ˜¯å¯¬åº¦ä¹Ÿä¸èƒ½äº‚çµ¦..ç›®å‰åªæ¸¬å‡º320ã€AdSize.FullWidth
     AdSize size = new AdSize(AdSize.FullWidth, 32);
 #if !UNITY_EDITOR && UNITY_ANDROID
     this.bannerView = new BannerView(adUnitId, size, AdPosition.Bottom);
@@ -217,7 +209,7 @@ public class AdsHelper : MonoBehaviour
     //    jc.CallStatic("BANNER", jo,gameObject.name);
     //#endif
   }
-  public void DismissBannerAds(){
+  public void DismissBannerAds() {
     if (bannerView == null)
       return;
 
@@ -228,8 +220,7 @@ public class AdsHelper : MonoBehaviour
 
   private InterstitialAd interstitial;
 
-  public void RequestInterstitialAds()
-  {
+  public void RequestInterstitialAds() {
 #if !UNITY_ANDROID
     return;
 #endif
@@ -244,8 +235,8 @@ public class AdsHelper : MonoBehaviour
         string adUnitId = "unexpected_platform";
 #endif
 
-    //¦b iOS ¤W¡A¹ï¹³¬OInterstitialAd¤@¦¸©Ê¨Ï¥Î¹ï¶H¡C
-    //³o·N¨ıµÛ¤@¥¹®i¥Ü¤F¤@­Ó´¡­¶¦¡¼s§i¡A¸ÓInterstitialAd¹ï¶H´N¤£¯à¥Î©ó¥[¸ü¥t¤@­Ó¼s§i¡C­n½Ğ¨D¥t¤@­Ó´¡­¶¦¡¼s§i¡A±z»İ­n³Ğ«Ø¤@­Ó·s InterstitialAd¹ï¶H¡C
+    //åœ¨ iOS ä¸Šï¼Œå°åƒæ˜¯InterstitialAdä¸€æ¬¡æ€§ä½¿ç”¨å°è±¡ã€‚
+    //é€™æ„å‘³è‘—ä¸€æ—¦å±•ç¤ºäº†ä¸€å€‹æ’é å¼å»£å‘Šï¼Œè©²InterstitialAdå°è±¡å°±ä¸èƒ½ç”¨æ–¼åŠ è¼‰å¦ä¸€å€‹å»£å‘Šã€‚è¦è«‹æ±‚å¦ä¸€å€‹æ’é å¼å»£å‘Šï¼Œæ‚¨éœ€è¦å‰µå»ºä¸€å€‹æ–° InterstitialAdå°è±¡ã€‚
     //if (this.interstitial != null){
     //  this.interstitial = null;
     //}
@@ -253,7 +244,7 @@ public class AdsHelper : MonoBehaviour
     // Initialize an InterstitialAd.
     this.interstitial = new InterstitialAd(adUnitId);
 
-    //interstitial ¼½©ñ´Á¶¡­n¼È°±­µ¼Ö­µ®Ä¡A©Î¥ô¦ó¹CÀ¸¤¤«ùÄò¹B¦æ¥B³y¦¨ª±®a¼vÅTªº¥\¯à
+    //interstitial æ’­æ”¾æœŸé–“è¦æš«åœéŸ³æ¨‚éŸ³æ•ˆï¼Œæˆ–ä»»ä½•éŠæˆ²ä¸­æŒçºŒé‹è¡Œä¸”é€ æˆç©å®¶å½±éŸ¿çš„åŠŸèƒ½
 
     // Called when an ad request has successfully loaded.
     this.interstitial.OnAdLoaded += AdLoaded;
@@ -269,17 +260,14 @@ public class AdsHelper : MonoBehaviour
     // Load the interstitial with the request.
     this.interstitial.LoadAd(request);
   }
-  public void ShowInterstitialAds(CommonAction OnClosed)
-  {
+  public void ShowInterstitialAds(CommonAction OnClosed) {
 
-    if (this.interstitial == null)
-    {
+    if (this.interstitial == null) {
       Debug.Log("interstitialAds is null Requset it first");
       return;
     }
 
-    if (this.interstitial.IsLoaded())
-    {
+    if (this.interstitial.IsLoaded()) {
       OnAdClosed = OnClosed;
       this.interstitial.Show();
       AudioController._AudioController.toggleMusic(false);
@@ -287,12 +275,11 @@ public class AdsHelper : MonoBehaviour
   }
 
   private RewardedAd rewardedAd;
-  public void RequestRewardAds()
-  {
+  public void RequestRewardAds() {
 #if !UNITY_ANDROID
     return;
 #endif
-    if (rewardedAd != null){
+    if (rewardedAd != null) {
       rewardedAd.Destroy();
       rewardedAd = null;
     }
@@ -306,8 +293,8 @@ public class AdsHelper : MonoBehaviour
         string adUnitId = "unexpected_platform";
 #endif
 
-    //¦b iOS ¤W¡A¹ï¹³¬OInterstitialAd¤@¦¸©Ê¨Ï¥Î¹ï¶H¡C
-    //³o·N¨ıµÛ¤@¥¹®i¥Ü¤F¤@­Ó´¡­¶¦¡¼s§i¡A¸ÓInterstitialAd¹ï¶H´N¤£¯à¥Î©ó¥[¸ü¥t¤@­Ó¼s§i¡C­n½Ğ¨D¥t¤@­Ó´¡­¶¦¡¼s§i¡A±z»İ­n³Ğ«Ø¤@­Ó·s InterstitialAd¹ï¶H¡C
+    //åœ¨ iOS ä¸Šï¼Œå°åƒæ˜¯InterstitialAdä¸€æ¬¡æ€§ä½¿ç”¨å°è±¡ã€‚
+    //é€™æ„å‘³è‘—ä¸€æ—¦å±•ç¤ºäº†ä¸€å€‹æ’é å¼å»£å‘Šï¼Œè©²InterstitialAdå°è±¡å°±ä¸èƒ½ç”¨æ–¼åŠ è¼‰å¦ä¸€å€‹å»£å‘Šã€‚è¦è«‹æ±‚å¦ä¸€å€‹æ’é å¼å»£å‘Šï¼Œæ‚¨éœ€è¦å‰µå»ºä¸€å€‹æ–° InterstitialAdå°è±¡ã€‚
     //if (this.interstitial != null){
     //  this.interstitial = null;
     //}
@@ -315,7 +302,7 @@ public class AdsHelper : MonoBehaviour
     // Initialize an InterstitialAd.
     this.rewardedAd = new RewardedAd(adUnitId);
 
-    //interstitial ¼½©ñ´Á¶¡­n¼È°±­µ¼Ö­µ®Ä¡A©Î¥ô¦ó¹CÀ¸¤¤«ùÄò¹B¦æ¥B³y¦¨ª±®a¼vÅTªº¥\¯à
+    //interstitial æ’­æ”¾æœŸé–“è¦æš«åœéŸ³æ¨‚éŸ³æ•ˆï¼Œæˆ–ä»»ä½•éŠæˆ²ä¸­æŒçºŒé‹è¡Œä¸”é€ æˆç©å®¶å½±éŸ¿çš„åŠŸèƒ½
 
     // Called when an ad request has successfully loaded.
     this.rewardedAd.OnAdLoaded += AdLoaded;
@@ -336,8 +323,7 @@ public class AdsHelper : MonoBehaviour
     this.rewardedAd.LoadAd(request);
 
   }
-  public  void ShowRewardAd(CommonAction OnClosed, CommonAction OnEarned,CommonAction OnFailedLoad)
-  {
+  public void ShowRewardAd(CommonAction OnClosed, CommonAction OnEarned, CommonAction OnFailedLoad) {
     OnAdClosed = OnClosed;
     //Debug.Log("519 - ShowRewardAd");
 
@@ -345,15 +331,12 @@ public class AdsHelper : MonoBehaviour
       return;
     //Debug.Log("519 - ShowRewardAd != null");
 
-    if (this.rewardedAd.IsLoaded())
-    {
+    if (this.rewardedAd.IsLoaded()) {
       //Debug.Log("519 - ShowRewardAd IsLoaded");
       this.rewardedAd.Show();
       OnRewardAdEarned = OnEarned;
       AudioController._AudioController.toggleMusic(false);
-    }
-    else
-    {
+    } else {
       Debug.Log("519 - ShowRewardAd Is Not Loaded");
       if (OnFailedLoad != null)
         OnFailedLoad();
@@ -363,9 +346,8 @@ public class AdsHelper : MonoBehaviour
   }
 
 
-  void AdLoaded(object sender, EventArgs args)
-  {
-    if(this.RectanglebannerView != null){
+  void AdLoaded(object sender, EventArgs args) {
+    if (this.RectanglebannerView != null) {
       Debug.Log("645 GetHeightInPixels : " + this.RectanglebannerView.GetHeightInPixels());
       Debug.Log("645 GetWidthInPixels : " + this.RectanglebannerView.GetWidthInPixels());
     }
@@ -387,37 +369,33 @@ public class AdsHelper : MonoBehaviour
 
     //}
   }
-  void AdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
-  {
-    if (OnAdClosed != null){
+  void AdFailedToLoad(object sender, AdFailedToLoadEventArgs args) {
+    if (OnAdClosed != null) {
       OnAdClosed();
       OnAdClosed = null;
     }
     AudioController._AudioController.toggleMusic(true);
-    Debug.Log("519 AdFailedToLoad sender : "+ sender .GetType()+ "¡AError " + args.LoadAdError);
+    Debug.Log("519 AdFailedToLoad sender : " + sender.GetType() + "ï¼ŒError " + args.LoadAdError);
   }
   // Called when an ad is clicked.
-  void AdClicked(object sender, EventArgs args)
-  {
+  void AdClicked(object sender, EventArgs args) {
     Debug.Log("AdClicked Get call back from native");
   }
-  void AdClosed(object sender, EventArgs args)
-  {
-    //½T«Odestroy()¼s§i?
-    //¼úÀy¦¡¼s§i«h¬°ª±®a±j¨îÃö³¬¼s§i
-    //¼úÀy¦¡¼s§i¡A«ØÄ³¦b³oÃä­n¨D¥[¸ü¤U¤@­Ó¼úÀy¦¡¼s§i
-    //«ì´_¹CÀ¸¹B¦æ
-    if (sender.GetType() == typeof(GoogleMobileAds.Api.RewardedAd)){
+  void AdClosed(object sender, EventArgs args) {
+    //ç¢ºä¿destroy()å»£å‘Š?
+    //çå‹µå¼å»£å‘Šå‰‡ç‚ºç©å®¶å¼·åˆ¶é—œé–‰å»£å‘Š
+    //çå‹µå¼å»£å‘Šï¼Œå»ºè­°åœ¨é€™é‚Šè¦æ±‚åŠ è¼‰ä¸‹ä¸€å€‹çå‹µå¼å»£å‘Š
+    //æ¢å¾©éŠæˆ²é‹è¡Œ
+    if (sender.GetType() == typeof(GoogleMobileAds.Api.RewardedAd)) {
       RequestRewardAds();
-      if (OnAdClosed != null){
+      if (OnAdClosed != null) {
         OnAdClosed();
         OnAdClosed = null;
       }
       AudioController._AudioController.toggleMusic(true);
-    }
-    else if(sender.GetType() == typeof(GoogleMobileAds.Api.InterstitialAd)){
+    } else if (sender.GetType() == typeof(GoogleMobileAds.Api.InterstitialAd)) {
 
-      if (OnAdClosed != null){
+      if (OnAdClosed != null) {
         OnAdClosed();
         OnAdClosed = null;
       }
@@ -427,33 +405,29 @@ public class AdsHelper : MonoBehaviour
     Debug.Log("AdClosed Get call back from native");
   }
 
-  void AdEarnedReward(object sender, Reward args){
+  void AdEarnedReward(object sender, Reward args) {
     string type = args.Type;
     double amount = args.Amount;
     Debug.Log(
         "HandleRewardedAdRewarded event received for "
                     + amount.ToString() + " " + type);
-    if (OnRewardAdEarned != null)
-    {
+    if (OnRewardAdEarned != null) {
       OnRewardAdEarned();
       OnRewardAdEarned = null;
     }
   }
-  void AdFailedToShow(object sender, AdErrorEventArgs args)
-  {
-    //¼úÀy¼s§iµLªk¶¶§QÅã¥Üªº±¡ªp
-    //¥i¯à´N¥ı¸õ¹L¤£Åıª±®a¬İ¼s§i»Pµ¹¼ú
-    if (sender.GetType() == typeof(GoogleMobileAds.Api.RewardedAd))
-    {
-      //RequestRewardAds();¤£«ØÄ³¦bµLªkÅã¥Ü¼s§iªº±¡ªp¦b¥[¸ü¼s§i
-      if (OnAdClosed != null){
+  void AdFailedToShow(object sender, AdErrorEventArgs args) {
+    //çå‹µå»£å‘Šç„¡æ³•é †åˆ©é¡¯ç¤ºçš„æƒ…æ³
+    //å¯èƒ½å°±å…ˆè·³éä¸è®“ç©å®¶çœ‹å»£å‘Šèˆ‡çµ¦ç
+    if (sender.GetType() == typeof(GoogleMobileAds.Api.RewardedAd)) {
+      //RequestRewardAds();ä¸å»ºè­°åœ¨ç„¡æ³•é¡¯ç¤ºå»£å‘Šçš„æƒ…æ³åœ¨åŠ è¼‰å»£å‘Š
+      if (OnAdClosed != null) {
         OnAdClosed();
         OnAdClosed = null;
         Debug.Log("519 AdFailedToShow : " + args);
       }
       AudioController._AudioController.toggleMusic(true);
-    }
-    else if (sender.GetType() == typeof(GoogleMobileAds.Api.InterstitialAd)){
+    } else if (sender.GetType() == typeof(GoogleMobileAds.Api.InterstitialAd)) {
       AudioController._AudioController.toggleMusic(true);
     }
     Debug.Log("AdFailedToShow : " + args);

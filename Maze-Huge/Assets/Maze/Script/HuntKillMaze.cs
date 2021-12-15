@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -39,6 +39,8 @@ public class HuntKillMaze : Maze
     bool mazenotdone = true;
     addPick_Pool(currentCell.X, currentCell.Y);
 
+    CellSpriteFactory csf = new CellSpriteFactory();
+
     while (mazenotdone){
 
 
@@ -77,6 +79,8 @@ public class HuntKillMaze : Maze
         currentCell.State = CellState.Visited;
         PickPool_List.Clear();
         addPick_Pool(currentCell.X, currentCell.Y);
+        csf.ProcessCell(hd.PickCell);
+        csf.ProcessCell(hd.LinkCell);
         continue;
       }
 
@@ -303,14 +307,15 @@ public class HuntKillMaze : Maze
   {
     foreach (var v in maze_cell_matrix)
     {
-      if (v.BottomWall == true)
-        WallBuilder._WallBuilder.BuildBottomWall(v.position(), grid_size);
-      if (v.LeftWall == true)
-        WallBuilder._WallBuilder.BuildLeftWall(v.position(), grid_size);
-      if (v.TopWall == true)
-        WallBuilder._WallBuilder.BuildTopWall(v.position(), grid_size);
-      if (v.RightWall == true)
-        WallBuilder._WallBuilder.BuildRightWall(v.position(), grid_size);
+      //if (v.BottomWall == true)
+      //  WallBuilder._WallBuilder.BuildBottomWall(v.position(), grid_size);
+      //if (v.LeftWall == true)
+      //  WallBuilder._WallBuilder.BuildLeftWall(v.position(), grid_size);
+      //if (v.TopWall == true)
+      //  WallBuilder._WallBuilder.BuildTopWall(v.position(), grid_size);
+      //if (v.RightWall == true)
+      //  WallBuilder._WallBuilder.BuildRightWall(v.position(), grid_size);
+      WallBuilder._WallBuilder.BuildCell(v,grid_size);
     }
   }
 

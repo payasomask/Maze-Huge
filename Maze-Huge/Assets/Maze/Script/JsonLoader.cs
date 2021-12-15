@@ -4,19 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class JsonLoader : MonoBehaviour
-{
+public class JsonLoader : MonoBehaviour {
 
   string jsonfilename = "BigMazeClassSetting.xlsx";
 
   public static JsonLoader _JsonLoader = null;
   Dictionary<int, MazeConfig> mazeConfig_dic = new Dictionary<int, MazeConfig>();
 
-  private void Awake(){
+  private void Awake() {
     _JsonLoader = this;
   }
 
-  public void Init(){
+  public void Init() {
     //start init
 
     Dictionary<string, object> jsontable = (Dictionary<string, object>)MiniJSON.Json.Deserialize(getJson(jsonfilename));
@@ -34,10 +33,9 @@ public class JsonLoader : MonoBehaviour
 
     //parse data_sheet
     Dictionary<string, object> Data_sheets = (Dictionary<string, object>)tablesheets["Setup"];
-    foreach (var v in Data_sheets)
-    {
+    foreach (var v in Data_sheets) {
       int start = int.Parse(v.Key);
-      Dictionary<string, object> vv =  (Dictionary<string, object>)v.Value;
+      Dictionary<string, object> vv = (Dictionary<string, object>)v.Value;
 
       string ends = (string)vv["End"];
       //string sstring = (string)vv["End"];
@@ -48,7 +46,7 @@ public class JsonLoader : MonoBehaviour
       int X = int.Parse(Xs);
       int Y = int.Parse(Ys);
 
-      for (int i = start; i <= end; i++){
+      for (int i = start; i <= end; i++) {
         MazeConfig tmp = new MazeConfig();
         tmp.Rows = X;
         tmp.Columns = Y;
@@ -65,8 +63,7 @@ public class JsonLoader : MonoBehaviour
     //level init
 
   }
-  string getJson(string jsonfilename)
-  {
+  string getJson(string jsonfilename) {
     string json_text;
 #if UNITY_ANDROID || UNITY_EDITOR
     TextAsset t = (TextAsset)Resources.Load(jsonfilename);
@@ -79,19 +76,19 @@ public class JsonLoader : MonoBehaviour
     return json_text;
   }
 
-  public MazeConfig GetMazeConfig(int level){
+  public MazeConfig GetMazeConfig(int level) {
 
-    if (mazeConfig_dic.Count == 0){
+    if (mazeConfig_dic.Count == 0) {
       Debug.Log("645 - Init JsonLoader first..");
       return null;
     }
-    
+
 
     return mazeConfig_dic[level];
   }
 }
 
-public enum ItmeType{
+public enum ItmeType {
   Item1,
   Item2
 }
@@ -101,50 +98,53 @@ public enum ItmeType{
 //  NIGHT
 //}
 
-public enum MazeType{
-  Prims=0,
+public enum MazeType {
+  Prims = 0,
   HuntKill,
   SZ
 }
 
-public class ADReward{
-  public ADReward(ItmeType Type, int Num, ItmeType skipType, int SkipNum)
-  {
+public class ADReward {
+  public ADReward(ItmeType Type, int Num, ItmeType skipType, int SkipNum) {
     this.Type = Type;
     this.Num = Num;
     this.SkipType = skipType;
     this.SkipNum = SkipNum;
   }
-  //¬Ý¼s§i
+  //çœ‹å»£å‘Š
   public ItmeType Type;
   public int Num;
-  //¤£¬Ý¼s§i¼úÀy
+  //ä¸çœ‹å»£å‘ŠçŽå‹µ
   public ItmeType SkipType;
   public int SkipNum;
 }
 
-public class MazeConfig{
+public class MazeConfig {
   public int Rows, Columns;
   public ADReward boxADReward;
   public ADReward CompletedReward;//
   public ADReward GameOverReward;//
-  public ADReward DownUIReward;//¤U¤è¼s§i¼úÀy
+  public ADReward DownUIReward;//ä¸‹æ–¹å»£å‘ŠçŽå‹µ
 }
 
-public class MazeRecord{
+public class MazeRecord {
+  public MazeRecord() {
+    RecordVersion = MainLogic._MainLogic.RecordVersion;
+  }
+  public int RecordVersion = 0;
   public Cell[,] cells;
   public JsonVector2 playerlocation;
   public JsonVector2 goallocation;
   public JsonVector2 boxlocation;
   public List<JsonVector3[]> lineRender_lists = null;
-  public List<JsonVector2> ItmePosition_list= null;
+  public List<JsonVector2> ItmePosition_list = null;
   public float time;
 }
 
-public class JsonVector2{
+public class JsonVector2 {
   public float x;
   public float y;
-  public JsonVector2(float x, float y){
+  public JsonVector2(float x, float y) {
     this.x = x;
     this.y = y;
   }
@@ -153,18 +153,16 @@ public class JsonVector2{
   }
 }
 
-public class JsonVector3{
+public class JsonVector3 {
   public float x;
   public float y;
   public float z;
-  public JsonVector3(float x, float y, float z)
-  {
+  public JsonVector3(float x, float y, float z) {
     this.x = x;
     this.y = y;
     this.z = z;
   }
-  public Vector3 vector3()
-  {
+  public Vector3 vector3() {
     return new Vector3(x, y, z);
   }
 }
