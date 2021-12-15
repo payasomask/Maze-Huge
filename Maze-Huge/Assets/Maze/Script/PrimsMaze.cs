@@ -36,8 +36,6 @@ public class PrimsMaze : Maze
 
     addPick_Pool(currentCell.X, currentCell.Y);
 
-    CellSpriteFactory csf = new CellSpriteFactory();
-
     while (PickPool_List.Count > 0) {
       //Debug.Log("currentCell座標 : [" + currentCell .X+"，"+ currentCell.Y +  "]尚有 " + PickPool_List.Count + "個可以選擇Pick的Cell");
 
@@ -59,9 +57,6 @@ public class PrimsMaze : Maze
       currentCell = pickCell;
       currentCell.State = CellState.Visited;
       addPick_Pool(currentCell.X, currentCell.Y);
-      csf.ProcessCell(pickCell);
-      csf.ProcessCell(LinkCell);
-
       removePick_Pool(pickCell);
     }
 
@@ -243,9 +238,11 @@ public class PrimsMaze : Maze
   }
 
   void DrawWall(){
+    CellSpriteFactory csf = new CellSpriteFactory();
     //左至右由下至上
     foreach (var v in maze_cell_matrix) 
     {
+      csf.ProcessCell(v);
       //if(v.X == 0)
       //  WallBuilder._WallBuilder.BuildBottomWall(v.position(), grid_size);
       //if (v.Y == 0)

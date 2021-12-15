@@ -918,9 +918,10 @@ public class MainLogic : MonoBehaviour
       else
       if (sdr == SceneDisposeReason.USER_EXIT)
       {
+        MazeManager._MazeManager.ClearMaze();
         mCurrentSceneTransition = new SceneTransition("LobbyScene", new object[] { }, delegate ()
         {
-          PlayerPrefsManager._PlayerPrefsManager.clearRecord();
+          //PlayerPrefsManager._PlayerPrefsManager.clearRecord();
           mCurrentSceneTransition = null;
         }, true);
       }

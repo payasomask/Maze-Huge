@@ -303,12 +303,12 @@ public class MazeScene : MonoBehaviour,IScene
 
   void Update(){
 
-    //if (Input.GetKeyUp(KeyCode.R)) {
-    //  //CREAT_MAZE();
-    //  pDisposeHandler(SceneDisposeReason.USER_EXIT, null);
-    //  currentstate = State.WAITPLAYER;
-    //  return;
-    //}
+    if (Input.GetKeyUp(KeyCode.R)) {
+      //CREAT_MAZE();
+      pDisposeHandler(SceneDisposeReason.USER_EXIT, null);
+      currentstate = State.WAITPLAYER;
+      return;
+    }
 
     if (currentstate == State.STOP){
       return;
@@ -332,6 +332,7 @@ public class MazeScene : MonoBehaviour,IScene
     else
     if (currentstate == State.CREAT_MAZE){
 
+
       MazeRecord mr = PlayerPrefsManager._PlayerPrefsManager.mazerecord;
       if (mr != null){
         //讀取紀錄
@@ -340,7 +341,6 @@ public class MazeScene : MonoBehaviour,IScene
       }
       else{
         //4:3或是方形
-        MazeManager._MazeManager.ClearMaze();
         MazeManager._MazeManager.CreatMaze(config.Rows, config.Columns);
       }
 

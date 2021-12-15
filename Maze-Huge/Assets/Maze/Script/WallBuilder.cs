@@ -7,6 +7,7 @@ public class WallBuilder : MonoBehaviour{
 
   public static WallBuilder _WallBuilder = null;
   private List<GameObject> Wall_list = new List<GameObject>();
+  private HashSet<GameObject> cellviewHash = new HashSet<GameObject>();
   private float wallwidth = 2.0f;
 
   [SerializeField]
@@ -55,6 +56,8 @@ public class WallBuilder : MonoBehaviour{
     GameObject cellView = CellViewPool.Pool.Get();
     Sprite floorSprite = AssetbundleLoader._AssetbundleLoader.InstantiateSprite("common", c.floorSpriteName);
     Sprite WallSprite = AssetbundleLoader._AssetbundleLoader.InstantiateSprite("common", c.wallSpriteName);
+    if (floorSprite == null)
+      Debug.Log("398 - floorSprite == null : " + c.floorSpriteName);
     float iconscale = maze_size / floorSprite.bounds.size.x;//根據圖資重新計算scale大小
     cellView.transform.localScale = new Vector3(iconscale, iconscale, 1.0f);
 
@@ -64,6 +67,7 @@ public class WallBuilder : MonoBehaviour{
       WallSprite
       );
     cellView.transform.localPosition = c.position();
+    cellviewHash.Add(cellView);
   }
 
 
@@ -84,7 +88,8 @@ public class WallBuilder : MonoBehaviour{
     }
     Wall_list = new List<GameObject>();
 
-    CellViewPool.Pool.Clear();
+    foreach (var v in cellviewHash)
+      CellViewPool.Pool.Release(v);
   }
 
   GameObject instantiateObject(GameObject parent, string name){
